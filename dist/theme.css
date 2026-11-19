@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* GAONNURI — visual identity / 2026 */
@@ -9,7 +9,7 @@
   --shadow:0 18px 52px rgba(20,33,55,.05);
 }
 html {scroll-behavior:smooth;}
-body {background:var(--bg);font-family:'Gowun Dodum','Malgun Gothic','Apple SD Gothic Neo',sans-serif;font-size:16px;line-height:1.85;letter-spacing:0;color:var(--ink);font-synthesis:weight;}
+body {background:var(--bg);font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;font-size:16px;line-height:1.85;letter-spacing:0;color:var(--ink);font-synthesis:none;}
 body h1,body h2,body h3,body h4 {letter-spacing:-.06em;line-height:1.28;}
 button,a,input { -webkit-tap-highlight-color:transparent; }
 a:focus-visible,button:focus-visible,input:focus-visible {outline:3px solid var(--accent);outline-offset:3px;}
@@ -92,8 +92,8 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .metric-grid {display:grid;grid-template-columns:repeat(4,1fr);margin:29px 0 93px;gap:0;background:#fff;border:1px solid #e1e7ef;border-radius:15px;overflow:hidden;box-shadow:var(--shadow);}
 .metric {padding:28px 34px;border:0;border-right:1px solid #e5eaf1;border-radius:0;background:#fff;box-shadow:none;}
 .metric:last-child {border-right:0;}
-.metric strong {display:block;font:800 clamp(30px,3vw,44px)/1.15 Manrope,'Gowun Dodum',sans-serif;letter-spacing:-.065em;color:var(--deep);}
-.metric strong span {font-family:'Gowun Dodum',sans-serif;font-weight:700;}
+.metric strong {display:block;font:800 clamp(30px,3vw,44px)/1.15 Manrope,'Noto Sans KR',sans-serif;letter-spacing:-.065em;color:var(--deep);}
+.metric strong span {font-family:'Noto Sans KR',sans-serif;font-weight:700;}
 .metric small {display:block;margin-top:10px;font-size:13px;color:#788597;}
 .section-head {margin:0 0 26px;align-items:end;gap:28px;}
 .section-head h2 {font-size:clamp(29px,2.7vw,37px);color:var(--deep);font-weight:840;letter-spacing:-.07em;margin-top:12px;}
@@ -119,7 +119,7 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .chapter-card:hover {transform:translateY(-3px);border-color:#bdc8d8;background:#fff;box-shadow:0 14px 40px #15263b10;}
 .chapter-card:hover:before {transform:scaleX(1);}
 .card-top {display:flex;align-items:center;justify-content:space-between;margin:0 0 19px;gap:15px;}
-.chapter-badge {color:var(--accent-deep);font:800 11px/1.5 Manrope,'Gowun Dodum',sans-serif;letter-spacing:.03em;}
+.chapter-badge {color:var(--accent-deep);font:800 11px/1.5 Manrope,'Noto Sans KR',sans-serif;letter-spacing:.03em;}
 .card-week {font-size:12px;color:#9aa6b5;font-weight:650;margin:0;}
 .chapter-card h3 {grid-column:auto;grid-row:auto;color:#18283f;font-size:22px;line-height:1.43;font-weight:790;margin:0 0 9px;}
 .chapter-card p {grid-column:auto;grid-row:auto;color:#768399;font-size:14px;line-height:1.78;min-height:0;margin:0 0 26px;flex:1;}
@@ -131,7 +131,7 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .chapter-card.is-locked .card-go:after {content:'';}
 .week-table {border:1px solid #e1e7f0;border-radius:14px;background:#fff;overflow:hidden;margin:0 0 70px;}
 .week-row {grid-template-columns:82px 1.05fr 1.4fr;gap:22px;padding:21px 25px;border-color:#edf0f4;font-size:14px;line-height:1.72;}
-.week-row>div:first-child {color:var(--accent-deep);font:800 13px Manrope,'Gowun Dodum',sans-serif;}
+.week-row>div:first-child {color:var(--accent-deep);font:800 13px Manrope,'Noto Sans KR',sans-serif;}
 .week-row>div:nth-child(2) {color:#24344c;font-weight:700;}
 .week-row>div:last-child {color:#7a879b;font-size:13px;}
 .closing-panel {background:#192840;color:#fff;border-radius:19px;padding:44px 48px;}
@@ -143,7 +143,7 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .footnote {color:#8793a4;font-size:12px;line-height:1.85;}
 .footnote a {text-decoration:underline;text-underline-offset:3px;}
 .detail-hero {padding:73px 0 48px;border-bottom:1px solid #dce4ee;}
-.detail-kicker {color:var(--accent-deep);font:800 12px Manrope,'Gowun Dodum',sans-serif;letter-spacing:.02em;gap:11px;}
+.detail-kicker {color:var(--accent-deep);font:800 12px Manrope,'Noto Sans KR',sans-serif;letter-spacing:.02em;gap:11px;}
 .detail-kicker span {color:#b6c1cf;}
 .detail-hero h1 {font-size:clamp(43px,4vw,65px);line-height:1.23;max-width:930px;color:#142137;margin:24px 0 17px;font-weight:840;letter-spacing:-.075em;}
 .detail-sub {color:#6b7b90;font-size:17px;line-height:1.9;max-width:850px;}
@@ -151,7 +151,7 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .mini-tag {background:#fff;border:1px solid #dce4ee;border-radius:8px;color:#718099;font-size:12px;font-weight:700;padding:8px 13px;}
 .learning-goal {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:0;margin:42px 0 79px;border-radius:16px;overflow:hidden;border:1px solid #dfe5ee;background:#fff;}
 .goal-black {background:var(--deep);padding:36px 39px;border-radius:0;}
-.goal-black .mini-label {font:850 11px Manrope,'Gowun Dodum',sans-serif;color:#ffa087;letter-spacing:.04em;}
+.goal-black .mini-label {font:850 11px Manrope,'Noto Sans KR',sans-serif;color:#ffa087;letter-spacing:.04em;}
 .goal-black h2 {font-size:29px;line-height:1.38;color:#fff;margin:14px 0;}
 .goal-black p {color:#bac8d9;font-size:14px;line-height:1.8;}
 .goal-white {display:flex;align-items:center;gap:21px;border:0;border-radius:0;padding:35px 38px;background:#fff;}
@@ -230,7 +230,7 @@ main {max-width:1460px;padding:0 clamp(24px,4.6vw,72px) 110px;}
 .auth-tabs button.active {background:#fff;color:var(--deep);box-shadow:0 1px 8px #17274215;}
 .auth-form {display:flex;flex-direction:column;gap:15px;}
 .auth-field label {display:block;color:#394c66;font-size:13px;font-weight:750;margin-bottom:7px;}
-.auth-field input {display:block;width:100%;border:1px solid #d8e1ec;border-radius:9px;padding:13px 14px;background:#fff;color:#17243a;font:500 15px 'Gowun Dodum',sans-serif;}
+.auth-field input {display:block;width:100%;border:1px solid #d8e1ec;border-radius:9px;padding:13px 14px;background:#fff;color:#17243a;font:500 15px 'Noto Sans KR',sans-serif;}
 .auth-field input:focus {outline:2px solid #f6a98f;border-color:#f07756;}
 .consent-row {display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#748197;line-height:1.75;cursor:pointer;}
 .consent-row input {width:16px;height:16px;margin-top:3px;accent-color:var(--accent-deep);flex:none;}
@@ -348,7 +348,7 @@ body.modal-open {overflow:hidden;}
 .policy-body {background:#f5f7fa;}
 .policy-nav {display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px clamp(24px,5vw,70px);background:#121d31;color:#fff;}
 .policy-nav a:first-child {font:850 22px Manrope,sans-serif;letter-spacing:-.08em;color:#f07756;}
-.policy-nav a:first-child span {color:#fff;font:800 17px 'Gowun Dodum',sans-serif;letter-spacing:-.06em;margin-left:10px;}
+.policy-nav a:first-child span {color:#fff;font:800 17px 'Noto Sans KR',sans-serif;letter-spacing:-.06em;margin-left:10px;}
 .policy-nav a:last-child {font-size:13px;color:#c4d0e0;}
 .policy-container {max-width:800px;padding:70px 24px 100px;margin:0 auto;}
 .policy-container h1 {font-size:clamp(38px,5vw,56px);margin:18px 0 15px;color:#142137;}
@@ -360,14 +360,14 @@ body.modal-open {overflow:hidden;}
 .policy-container section p {font-size:15px;color:#607187;line-height:2;}
 .policy-end {color:#98a5b6;font-size:12px;}
 
-/* 가온누리: 부드러운 한글 서체와 여유 있는 읽기 간격 */
-body h1,body h2,body h3,body h4 {font-family:var(--font-korean);font-weight:400;letter-spacing:-.015em;line-height:1.45;}
-:root {--font-korean:'Gowun Dodum','Malgun Gothic','Apple SD Gothic Neo',sans-serif;}
+/* 가온누리: 깔끔한 고딕체와 명확한 제목·본문 위계 */
+body h1,body h2,body h3,body h4 {font-family:var(--font-korean);font-weight:700;letter-spacing:-.015em;line-height:1.45;}
+:root {--font-korean:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;}
 button,input,select,textarea {font-family:var(--font-korean);}
-.brand-text strong {font-weight:400;letter-spacing:0;line-height:1.35;}
-.hero h1 {font-size:clamp(44px,4.6vw,70px);font-weight:400;line-height:1.35;letter-spacing:-.025em;}
-.detail-hero h1,.section-head h2,.teaser-card h2,.goal-black h2,.closing-panel h2 {font-weight:400;line-height:1.45;letter-spacing:-.015em;}
+.brand-text strong {font-weight:700;letter-spacing:0;line-height:1.35;}
+.hero h1 {font-size:clamp(44px,4.6vw,70px);font-weight:700;line-height:1.35;letter-spacing:-.025em;}
+.detail-hero h1,.section-head h2,.teaser-card h2,.goal-black h2,.closing-panel h2 {font-weight:700;line-height:1.45;letter-spacing:-.015em;}
 .hero .intro,.detail-sub,.theory-box li,.step p,.exercise p {line-height:1.95;letter-spacing:0;}
-.chapter-card h3,.phase-tile h3,.detail-section h2,.step h3,.side-card h3,.auth-dialog h2 {font-weight:400;letter-spacing:-.01em;}
+.chapter-card h3,.phase-tile h3,.detail-section h2,.step h3,.side-card h3,.auth-dialog h2 {font-weight:600;letter-spacing:-.01em;}
 .nav-link {font-size:14px;line-height:1.65;letter-spacing:0;}
 .auth-field input {font-size:16px;}
