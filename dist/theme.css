@@ -365,7 +365,8 @@ body h1,body h2,body h3,body h4 {font-family:var(--font-korean);font-weight:400;
 :root {--font-korean:'Gowun Dodum','Malgun Gothic','Apple SD Gothic Neo',sans-serif;}
 button,input,select,textarea {font-family:var(--font-korean);}
 .brand-text strong {font-weight:400;letter-spacing:0;line-height:1.35;}
-.hero h1 {font-size:clamp(44px,4.6vw,70px);line-height:1.35;letter-spacing:-.025em;}
+.hero h1 {font-size:clamp(44px,4.6vw,70px);font-weight:400;line-height:1.35;letter-spacing:-.025em;}
+.detail-hero h1,.section-head h2,.teaser-card h2,.goal-black h2,.closing-panel h2 {font-weight:400;line-height:1.45;letter-spacing:-.015em;}
 .hero .intro,.detail-sub,.theory-box li,.step p,.exercise p {line-height:1.95;letter-spacing:0;}
 .chapter-card h3,.phase-tile h3,.detail-section h2,.step h3,.side-card h3,.auth-dialog h2 {font-weight:400;letter-spacing:-.01em;}
 .nav-link {font-size:14px;line-height:1.65;letter-spacing:0;}
