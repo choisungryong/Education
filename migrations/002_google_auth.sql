@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS google_identities (
+  subject TEXT PRIMARY KEY,
+  member_id TEXT NOT NULL UNIQUE REFERENCES members(id) ON DELETE CASCADE
+);

@@ -1,0 +1,20 @@
+{
+  "name": "education",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-11-19",
+  "vars": { "REGISTRATION_OPEN": "true" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "launchlab-members",
+      "database_id": "370357d2-497a-4922-8d71-5f03ef159aec",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "env": {
+    "preview": {
+      "vars": { "REGISTRATION_OPEN": "false" },
+      "d1_databases": []
+    }
+  }
+}

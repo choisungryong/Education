@@ -32,9 +32,22 @@ Cloudflare 대시보드에서 **Workers & Pages → Create application → Pages
 
 연결 후 `main` 브랜치에 커밋을 푸시하면 Pages가 새 버전을 배포하도록 구성할 수 있습니다.
 
-### 회원 시스템 활성화 — 추가 Cloudflare 설정 필수
+### 회원 시스템과 Google 로그인 설정
 
-**현재 회원가입은 기본적으로 잠겨 있습니다.** 실제 수강생 정보를 받기 전에 다음 단계를 완료하세요.
+`wrangler.jsonc`에서 프로덕션 D1 `launchlab-members`를 `DB`로 연결하고 `REGISTRATION_OPEN=true`로 설정합니다. Preview는 프로덕션 DB를 사용하지 않고 가입도 닫힙니다. 프로덕션 테이블은 `migrations/001_membership.sql`, `migrations/002_google_auth.sql` 순서로 생성합니다.
+
+Google 로그인은 다음 추가 설정이 필요합니다.
+
+1. Google Auth Platform에서 OAuth 동의 화면에 서비스 이름, 지원 이메일, 공개 홈페이지와 정책 링크를 등록합니다. 외부 사용자에게 공개하려면 대상 사용자를 외부로 설정하고 게시합니다. 테스트 모드에서는 등록한 테스트 사용자만 이용할 수 있습니다.
+2. OAuth 클라이언트를 **웹 애플리케이션** 유형으로 생성합니다. 승인된 JavaScript 원본은 `https://education-epc.pages.dev`입니다. 커스텀 도메인이 생기면 해당 HTTPS 원본도 별도로 추가합니다.
+3. 발급된 공개 클라이언트 ID를 `wrangler.jsonc`의 프로덕션 `vars.GOOGLE_CLIENT_ID`에 추가하고 배포합니다. GIS 팝업 방식이므로 클라이언트 보안 비밀과 리디렉션 URI는 사용하지 않습니다.
+4. 사이트에서 Google 가입, 로그아웃, 재로그인과 Google 재인증 후 탈퇴를 확인합니다. 서버는 Google 서명, 발급자, 대상 클라이언트, 만료 시각, 이메일 인증 여부와 nonce를 검증합니다. 동일 이메일의 기존 비밀번호 계정에는 자동 연결하지 않습니다.
+
+이메일/Google 가입은 모두 약관 동의를 요구합니다. Google ID가 없으면 이메일 가입만 제공하고 연결 준비 안내를 표시합니다. Google 비밀번호와 원본 ID 토큰은 데이터베이스에 저장하지 않습니다.
+
+아래 내용은 초기 설치 절차이며, 현재 프로젝트는 위 Wrangler 설정을 기준으로 배포됩니다.
+
+새 환경에 설치할 때에는 데이터베이스와 정책 정보를 확인한 뒤 회원가입을 개방하세요.
 
 1. Cloudflare 대시보드에서 **D1 데이터베이스**를 새로 만들고 이름을 `launchlab-members`로 지정합니다.
 2. D1 Console에서 `migrations/001_membership.sql`을 실행합니다. CLI를 사용하는 경우:

@@ -230,6 +230,23 @@ const overlay=document.createElement('div');overlay.className='mobile-overlay';o
 function closeMenu(){$('#sidebar').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false');overlay.hidden=true;}
 $('#menu-btn').addEventListener('click',()=>{const isOpen=$('#sidebar').classList.toggle('open');$('#menu-btn').setAttribute('aria-expanded',String(isOpen));overlay.hidden=!isOpen;});overlay.addEventListener('click',closeMenu);
 const authRoot=document.createElement('div');authRoot.id='auth-root';document.body.append(authRoot);
+let googleScript;
+async function mountGoogleButton(target, onCredential){
+  const config=await api('/api/auth-config');
+  if(!target.isConnected)return;
+  if(!config.googleClientId){target.textContent='Google 로그인 연결 준비 중 · 이메일로 이용해 주세요.';return;}
+  if(!googleScript)googleScript=new Promise((resolve,reject)=>{
+    const script=document.createElement('script');script.src='https://accounts.google.com/gsi/client?hl=ko';script.async=true;
+    script.onload=resolve;script.onerror=()=>{googleScript=null;script.remove();reject(new Error('Google 로그인 화면을 불러오지 못했습니다. 다시 시도해 주세요.'));};document.head.append(script);
+  });
+  await googleScript;
+  if(!target.isConnected)return;
+  target.replaceChildren();
+  google.accounts.id.initialize({client_id:config.googleClientId,nonce:config.nonce,auto_select:false,callback:response=>{
+    if(target.isConnected)onCredential(response.credential);
+  }});
+  google.accounts.id.renderButton(target,{theme:'outline',size:'large',text:'continue_with',locale:'ko',width:Math.min(340,target.clientWidth||300)});
+}
 function closeAuth(){
   authRoot.replaceChildren();
   document.body.classList.remove('modal-open');
@@ -244,6 +261,10 @@ function showAuth(mode='signup'){
     <h2 id="auth-heading">${signup?'배움을 시작해 볼까요?':'다시 만나 반갑습니다.'}</h2>
     <p class="auth-intro">${signup?'무료 회원가입 후 1강부터 시작하고, 수업을 완료할 때마다 다음 강의를 열어보세요.':'가입한 이메일과 비밀번호로 로그인하면 내 학습 진도를 이어갈 수 있습니다.'}</p>
     <div class="auth-tabs"><button type="button" class="${signup?'active':''}" data-auth-mode="signup">회원가입</button><button type="button" class="${!signup?'active':''}" data-auth-mode="login">로그인</button></div>
+    <div class="google-auth">
+      ${signup?`<label class="consent-row"><input type="checkbox" id="google-terms"><span>Google 가입을 위한 <a href="terms.html" target="_blank" rel="noopener">이용약관</a>과 <a href="privacy.html" target="_blank" rel="noopener">개인정보 처리방침</a>에 동의합니다.</span></label>`:''}
+      <div id="google-button" role="group" aria-label="Google로 계속하기">Google 로그인 확인 중…</div>
+    </div><div class="auth-divider">또는 이메일로 ${signup?'가입':'로그인'}</div>
     <form class="auth-form" id="auth-form">
       <div class="auth-field"><label for="auth-email">이메일</label><input id="auth-email" type="email" name="email" placeholder="name@example.com" autocomplete="email" maxlength="254" required></div>
       <div class="auth-field"><label for="auth-password">비밀번호</label><input id="auth-password" type="password" name="password" placeholder="${signup?'10자 이상 입력':'비밀번호 입력'}" autocomplete="${signup?'new-password':'current-password'}" minlength="10" maxlength="128" required></div>
@@ -258,6 +279,15 @@ function showAuth(mode='signup'){
   $$('[data-auth-close]',authRoot).forEach(el=>el.addEventListener('click',closeAuth));
   $$('[data-auth-mode]',authRoot).forEach(el=>el.addEventListener('click',()=>showAuth(el.dataset.authMode)));
   $('#auth-email',authRoot)?.focus();
+  const googleTarget=$('#google-button',authRoot);
+  mountGoogleButton(googleTarget,async credential=>{
+    const feedback=$('#auth-feedback',authRoot);
+    const acceptedTerms=Boolean($('#google-terms',authRoot)?.checked);
+    if(signup&&!acceptedTerms){feedback.textContent='Google 가입 약관에 먼저 동의해 주세요.';return;}
+    feedback.textContent='Google 계정을 확인하고 있습니다…';
+    try{const member=await api('/api/google','POST',{credential,acceptedTerms});if(!googleTarget.isConnected)return;setSession(member);closeAuth();route();}
+    catch(err){if(googleTarget.isConnected)feedback.textContent=err.message;}
+  }).catch(err=>{if(googleTarget.isConnected)googleTarget.textContent=err.message;});
   $('#auth-form',authRoot).addEventListener('submit',async event=>{
     event.preventDefault();
     const form=event.currentTarget;
@@ -287,15 +317,22 @@ function showAccount(){
   <span class="auth-logo">L.</span><h2 id="account-title">내 계정 관리</h2>
   <p class="auth-intro">현재 계정: ${safeText(state.session.email)}</p>
   <form id="delete-form" class="auth-form">
-    <div class="auth-field"><label for="delete-password">회원 탈퇴를 위한 비밀번호 확인</label><input id="delete-password" type="password" name="password" autocomplete="current-password" required></div>
+    ${state.session.authMethod==='google'?'<p class="auth-note">가입한 Google 계정을 다시 인증한 뒤 탈퇴할 수 있습니다.</p><div id="google-delete-button"></div>':'<div class="auth-field"><label for="delete-password">회원 탈퇴를 위한 비밀번호 확인</label><input id="delete-password" type="password" name="password" autocomplete="current-password" required></div>'}
     <p class="auth-note">탈퇴하면 계정 및 학습 체크 기록이 삭제되며 복원할 수 없습니다.</p>
     <p class="auth-feedback" id="delete-feedback" role="alert"></p>
-    <button class="auth-submit" type="submit">계정과 진도 기록 삭제</button>
+    ${state.session.authMethod==='google'?'':'<button class="auth-submit" type="submit">계정과 진도 기록 삭제</button>'}
   </form></section></div>`;
   document.body.classList.add('modal-open');
   $$('[data-auth-close]',authRoot).forEach(el=>el.addEventListener('click',closeAuth));
+  const deleteGoogle=$('#google-delete-button',authRoot);
+  if(deleteGoogle)mountGoogleButton(deleteGoogle,async credential=>{
+    if(!window.confirm('계정과 진도 기록을 영구 삭제하시겠습니까?'))return;
+    try{await api('/api/delete-account','POST',{credential});if(!deleteGoogle.isConnected)return;closeAuth();setSession({authenticated:false,unlocked:0,completed:[]});route();}
+    catch(err){if(deleteGoogle.isConnected)$('#delete-feedback',authRoot).textContent=err.message;}
+  }).catch(err=>{if(deleteGoogle.isConnected)deleteGoogle.textContent=err.message;});
   $('#delete-form',authRoot).addEventListener('submit',async event=>{
     event.preventDefault();
+    if(state.session.authMethod==='google')return;
     if(!window.confirm('계정과 진도 기록을 영구 삭제하시겠습니까?'))return;
     const submit=event.currentTarget.querySelector('[type=submit]');submit.disabled=true;
     try{

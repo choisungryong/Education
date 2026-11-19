@@ -341,6 +341,10 @@ body.modal-open {overflow:hidden;}
   *,*:before,*:after {scroll-behavior:auto!important;transition:none!important;animation:none!important;}
 }
 /* Standalone legal pages — deliberately marked as drafts until verified. */
+.google-auth {margin:18px 0;}
+.google-auth [role="group"] {display:flex;justify-content:center;min-height:44px;font-size:13px;color:#607187;text-align:center;}
+.auth-divider {display:flex;align-items:center;gap:12px;margin:18px 0;color:#778497;font-size:12px;}
+.auth-divider:before,.auth-divider:after {content:'';height:1px;background:#dfe5ed;flex:1;}
 .policy-body {background:#f5f7fa;}
 .policy-nav {display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px clamp(24px,5vw,70px);background:#121d31;color:#fff;}
 .policy-nav a:first-child {font:850 22px Manrope,sans-serif;letter-spacing:-.08em;color:#f07756;}

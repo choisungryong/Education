@@ -11,6 +11,7 @@ import { onRequestPost as deleteAccount } from '../functions/api/delete-account.
 
 const sql = new DatabaseSync(':memory:');
 sql.exec(fs.readFileSync(new URL('../migrations/001_membership.sql', import.meta.url), 'utf8'));
+sql.exec(fs.readFileSync(new URL('../migrations/002_google_auth.sql', import.meta.url), 'utf8'));
 
 const DB = {
   prepare(query) {
