@@ -1,9 +1,4 @@
-const VIDEO='https://www.youtube.com/watch?v=P3jFI-VpyLg';
-const tm=(h,m,s=0)=>h*3600+m*60+s;
-const youtube=(seconds)=>`${VIDEO}&t=${seconds}s`;
 const sources={
-  jocoding:{label:'조코딩 1인 창업 3시간 통합본',url:VIDEO,note:'2026.2.15 공개 영상 · 챕터 시각표 기반'},
-  course:{label:'조코딩 공식 5주 부트캠프',url:'https://jocoding.net/courses/ai-product-builder/',note:'5주 수업 범위와 실습 구성 참고'},
   cloudflare:{label:'Cloudflare Pages 공식 문서',url:'https://developers.cloudflare.com/pages/',note:'정적 웹 배포 및 도메인 연결'},
   github:{label:'GitHub Pages 공식 문서',url:'https://docs.github.com/en/pages',note:'정적 페이지 무료 호스팅'},
   googleSEO:{label:'Google SEO 시작 가이드',url:'https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko',note:'검색 친화성 공식 안내'},
@@ -32,146 +27,103 @@ const phases=[
   {id:'business',number:'05',name:'진짜 사업 운영',description:'사업자 행정, 법무·세무, 장애대응, 최종 출시',range:'CH 16–18'},
 ];
 const chapters=[
-{
-id:'01',week:1,phase:'plan',title:'AI, 제품, 1인 창업의 지도',sub:'AI를 모르는 사람도 서비스 비즈니스가 돌아가는 전체 흐름을 이해한다.',result:'서비스 구조도 1장',
-theory:['생성형 AI·LLM·프롬프트·토큰·API의 차이를 비유와 실제 화면으로 이해','웹서비스 구성: 화면 → 서버/API → 데이터베이스 → 외부 AI → 배포 → 고객','Google Ads(광고비 지출)와 AdSense(광고수익 수취)는 전혀 다른 제품이라는 점'],
-steps:[['일상 문제 10개 적기','자주 반복되고 시간·돈이 드는 불편을 나열한다. 기술 아이디어보다 문제부터 시작한다.'],['AI 직접 비교','같은 업무를 일반 검색, 챗봇, 단순 자동화에 각각 맡겨 결과·비용·오류를 기록한다.'],['웹서비스 체험 분석','사용 중인 SaaS 한 개의 회원가입·핵심행동·과금 경로를 화면에 표시한다.'],['사업 흐름 그리기','방문 → 가입 → 가치 체험 → 결제 → 재사용 → 고객지원의 흐름을 도식화한다.']],
-mission:'“내가 2주 안에 만들 수 있는 작은 서비스”를 정하고 대상 고객·문제·핵심 기능 1개를 적는다.',checks:['LLM과 API를 쉬운 말로 설명한다','서비스의 화면·서버·DB 위치를 구분한다','광고 지출과 광고 수익 모델을 구분한다','서비스 아이디어 한 줄을 완성한다'],pitfalls:['AI의 답을 사실이나 법적 조언으로 확정하지 않는다.','처음부터 거대한 플랫폼을 만들려 하지 않는다.'],refs:['jocoding','course'],video:{time:tm(0,3,10),label:'왜 지금 1인 창업의 시대인가 · 03:10'}
-},
-{
-id:'02',week:1,phase:'plan',title:'돈이 되는 문제 검증',sub:'코딩 전에 고객이 정말 필요로 하는 서비스인지 증거를 수집한다.',result:'고객 인터뷰 5건 + 검증표',
-theory:['문제(problem)·해결(solution)·구매자(buyer)는 각각 다를 수 있다','가짜 관심(좋아요)과 구매·예약·연락처 제공 같은 행동 신호의 차이','경쟁 서비스의 가격·사용자 리뷰·불만에서 진입 기회를 찾는 법'],
-steps:[['한 명의 고객 정의','“모든 사람” 대신 직업·상황·문제·현재 대안을 구체화해 페르소나 한 장 작성.'],['경쟁 5개 조사','가격표·무료 한도·후기·고객 불편·검색 유입 키워드를 비교표로 만든다.'],['고객 5명 대화','“이 앱 쓸래요?” 대신 마지막으로 문제가 생긴 시점, 해결 방식, 실제 지불 여부를 질문한다.'],['검증 지표 선언','사전 예약 3건, 연락처 10개, 반복 사용 5건 등 작고 관찰 가능한 기준을 정한다.']],
-mission:'30초 설명문·랜딩페이지 문구를 만들고 대상 고객 5명에게 피드백을 받는다.',checks:['명확한 고객 한 집단을 정했다','경쟁 사례 5개와 차별점을 기록했다','고객 인터뷰 5건을 실시했다','개발 지속·중단 판단 기준을 정했다'],pitfalls:['친구의 칭찬을 결제 의향으로 오해하지 않는다.','유료 검증 전 광고비부터 크게 집행하지 않는다.'],refs:['course'],video:{time:tm(1,15,18),label:'MVP·데이터·프로덕트 성공 · 1:15:18'}
-},
-{
-id:'03',week:2,phase:'plan',title:'MVP 설계와 AI 개발 지시서',sub:'비개발자도 AI 코딩 도구에 전달할 수 있는 설계 문서를 완성한다.',result:'PRD·화면 흐름·검수 기준',
-theory:['MVP는 기능이 적은 완제품이지, 핵심 행동이 작동하지 않는 시제품이 아니다','PRD(제품 요구사항), 사용자 스토리, 수용 기준, 예외 흐름의 역할','AI 코딩 지시의 기본: 목표 → 제약 → 현재 상태 → 테스트 → 완료 조건'],
-steps:[['핵심 행동 1개 결정','예: 텍스트 업로드 → 결과 생성 → 다운로드. 부가기능은 이후 백로그로.'],['화면 4장 설계','랜딩, 입력, 결과, 결제/문의 화면을 종이나 피그마에서 그린다.'],['PRD 작성','필수 기능·비기능(속도, 접근성, 보안)·성공 조건·제외 범위를 2페이지로 쓴다.'],['AI에게 작업 분리 지시','한 번에 모두 구현 대신 화면→API→테스트 순으로 작게 요청하고 검증한다.']],
-mission:'AI 개발 도구에 “먼저 설계만 검토하고, 위험·질문·단계별 작업을 제시하라”는 작업지시서를 넣는다.',checks:['핵심 사용 시나리오 하나가 선명하다','화면/데이터 흐름이 그려졌다','PRD와 수용기준이 존재한다','AI 지시문에 금지·검증 조건을 넣었다'],pitfalls:['설계 확정 전 코드 수십 파일을 생성하지 않는다.','API 키·실제 개인정보를 프롬프트에 붙여넣지 않는다.'],refs:['jocoding'],video:{time:tm(1,38,31),label:'결제 가능한 아이디어 기획 · 1:38:31'}
-},
-{
-id:'04',week:2,phase:'build',title:'웹 화면 만들기와 바이브 코딩',sub:'프롬프트로 실제 작동하는 반응형 화면을 만들고 직접 고친다.',result:'작동하는 프론트엔드',
-theory:['HTML(내용), CSS(디자인), JS(동작)를 15분 안에 구분하기','React/Vite/Next.js 차이: 초보 실습은 단순 구조에서 시작','Git 저장소·버전·커밋은 “AI가 망가뜨린 코드 되돌리기” 도구'],
-steps:[['프로젝트 시작','개발 환경·Git 저장소 생성 후 예제 사이트를 브라우저에서 실행한다.'],['랜딩 + 핵심 화면','AI에게 PRD 기반 반응형 페이지를 요청하고 텍스트·입력·결과 상태를 확인한다.'],['사용자 흐름 구현','정상·빈 값·로딩·오류 상태와 입력 검증을 추가한다.'],['모바일·접근성 점검','375px 화면에서 스크롤·버튼·폰트·키보드 포커스를 테스트한다.']],
-mission:'실제 사람들이 클릭할 수 있는 4개 화면과 한 가지 핵심 행동을 시연한다.',checks:['소스 저장소가 생성됐다','랜딩/입력/결과 화면이 열린다','모바일에서 무너지지 않는다','오류 상태를 UI에 안내한다'],pitfalls:['AI가 낸 코드가 실행되는지 매 단계 확인한다.','자동 생성한 라이브러리와 외부 스크립트의 출처를 확인한다.'],refs:['jocoding','github'],video:{time:tm(0,42,8),label:'AI CLI 개발 환경 · 42:08'}
-},
-{
-id:'05',week:3,phase:'build',title:'AI API 연결과 비용 통제',sub:'프론트엔드를 실제 AI 결과를 내는 서비스로 바꾼다.',result:'AI 기능이 돌아가는 MVP',
-theory:['클라이언트/서버/HTTP/API/JSON 및 환경변수의 최소 개념','요청당 토큰·이미지·음성·네트워크 원가와 가격표의 관계','재시도·타임아웃·레이트리밋·사용량 상한이 필요한 이유'],
-steps:[['서버 측 API 라우트','브라우저에서 외부 AI를 직접 호출하지 않고 서버가 프록시하도록 구성한다.'],['정상·실패 응답','입력 검증, 4xx/5xx 안내, 응답시간 제한과 예외 처리를 작성한다.'],['비용 상한 실습','사용자당 일일 횟수, 요청 길이 한도, 모델별 원가 로그를 만든다.'],['최소 사용성 테스트','서로 다른 실제 입력 10개를 실행해 결과 품질과 비용을 기록한다.']],
-mission:'실습 계정에서 10회 호출 후 평균 응답시간·예상 1회 원가를 적는다.',checks:['API 키가 브라우저 코드에 없다','오류/타임아웃 메시지를 보여준다','호출별 비용 추정이 가능하다','사용량 제한이 구현됐다'],pitfalls:['키를 GitHub에 올렸다면 삭제만 하지 말고 즉시 폐기·교체한다.','“AI 사용량 무제한”을 원가 검증 없이 제공하지 않는다.'],refs:['jocoding'],video:{time:tm(1,55,48),label:'API 및 AI API 활용 · 1:55:48'}
-},
-{
-id:'06',week:3,phase:'build',title:'DB·로그인·개인정보 최소 수집',sub:'사용자 데이터를 안전하게 저장하고 권한을 통제한다.',result:'DB·인증·기본 권한 테스트',
-theory:['DB 테이블·기본키·관계·인덱스와 저장소(object storage)의 차이','인증(Authentication)과 인가(Authorization)의 차이','수집 최소화·보유기간·삭제 기능이 서비스 설계에 미치는 영향'],
-steps:[['데이터 모델','사용자·작업·결제 상태에 필요한 필드만 설계하고 민감정보는 제외한다.'],['DB 및 저장소 연결','예제 Supabase 또는 동등한 DB/스토리지에 테스트 데이터를 저장한다.'],['로그인/권한 실습','소셜 로그인 또는 이메일 로그인 후 다른 계정의 기록을 읽지 못하는지 점검한다.'],['데이터 삭제 흐름','탈퇴·업로드 삭제·백업 보존 기준을 별도 체크리스트로 정리한다.']],
-mission:'A 계정으로 생성한 기록이 B 계정에서 조회·수정되지 않는 테스트를 통과시킨다.',checks:['DB 스키마가 문서화됐다','로그인된 사용자만 개인 데이터 접근','타 계정 접근 차단을 검증했다','수집·보존·파기 목록을 만들었다'],pitfalls:['개인 데이터를 공개 버킷에 저장하지 않는다.','로그에 비밀번호·주민번호·토큰을 남기지 않는다.'],refs:['privacy','jocoding'],video:{time:tm(2,12,20),label:'DB·Supabase · 2:12:20'}
-},
-{
-id:'07',week:4,phase:'build',title:'테스트·보안·운영 준비',sub:'“내 컴퓨터에서 됨”을 넘어 고객이 써도 괜찮은 품질로 만든다.',result:'출시 전 QA 리포트',
-theory:['테스트는 기능·보안·성능·호환성·데이터 정합성으로 나누어 확인','시크릿 관리·접근권한·의존성 업데이트·백업의 최소 운영 수칙','법적 준수 이전에 서비스 신뢰를 만드는 오류 알림·문의·복구'],
-steps:[['대표 시나리오 15개','정상 가입/로그인/호출/결제 미완료/취소/로그아웃과 오류 상황을 테스트한다.'],['배포 전 보안 확인','키 노출, CORS, 공개 DB, 비밀 파일, 입력값 검증, 과도한 권한 점검.'],['관측 가능성','오류 로그·상태 페이지·문의 메일·알림 채널 중 핵심 3개를 만든다.'],['복구 리허설','이전 버전 배포로 돌아가기, DB 백업 복원 절차를 문서화한다.']],
-mission:'다른 수강생과 교차 테스트해 치명적 결함 0개 상태의 QA 기록을 남긴다.',checks:['핵심 시나리오 15개 결과가 있다','API 키/DB 권한 노출이 없다','문의 경로가 동작한다','롤백과 백업 경로를 설명한다'],pitfalls:['무료 플랜의 가용성·사용량 제한을 확인하지 않는다.','테스트 데이터를 실제 고객정보와 섞지 않는다.'],refs:['cloudflare'],video:{time:tm(2,25,12),label:'실무 운영 및 최적화 · 2:25:12'}
-},
-{
-id:'08',week:4,phase:'build',title:'서비스 포팅·호스팅·도메인·배포',sub:'로컬 시제품을 실제 인터넷에 운영 가능한 서비스로 배포한다.',result:'HTTPS 공개 URL + 릴리스 기록',
-theory:['호스팅·도메인·DNS(A/CNAME)·HTTPS·CDN 개념','개발/스테이징/운영 환경변수 분리와 CI/CD·버전 관리','정적 프런트와 서버 API·DB가 각각 어디서 실행되는지 판단'],
-steps:[['배포 플랫폼 결정','Cloudflare Pages 또는 적절한 호스팅을 선택하고 서비스의 서버 기능 지원 여부를 확인한다.'],['도메인과 DNS','도메인 구매 → DNS 레코드 설정 → HTTPS 발급 → www/루트 도메인 정규화 확인.'],['운영 설정 포팅','개발 API 주소·시크릿·DB 연결을 운영 값으로 분리하고 환경별 설정을 확인한다.'],['릴리스 리허설','빌드→배포→실서비스 접속→로그 확인→롤백 순서를 수행한다.']],
-mission:'휴대폰 LTE/5G에서 본인 도메인으로 접속해 핵심 기능을 실행한 영상을 찍는다.',checks:['내 도메인에서 HTTPS 접속된다','운영 시크릿이 서버 측에 저장됐다','모바일 외부망 검증을 통과했다','이전 버전으로 롤백할 수 있다'],pitfalls:['배포 URL만 보고 API/DB 작동 여부를 생략한다.','도메인 자동갱신·결제수단·만료 알림을 잊지 않는다.'],refs:['cloudflare','github'],video:{time:tm(0,31,31),label:'배포(Deploy) 실습 · 31:31'}
-},
-{
-id:'09',week:5,phase:'launch',title:'수익모델·가격·결제·구독',sub:'무료 사용자가 유료 고객이 되는 구조를 만들고 한 건의 거래를 안전하게 처리한다.',result:'가격표 + 테스트 결제 흐름',
-theory:['무료/체험/건당/구독/B2B 라이선스 중 비용 구조와 맞는 방식 선택','매출과 이익은 다르다: PG 수수료·환불·AI 원가·서버비·광고비','결제 승인만이 아니라 웹훅 검증·중복 처리·해지·환불이 필요'],
-steps:[['원가표 작성','1회 AI 호출 원가, 월 고정비, 수수료, 평균 사용량을 입력해 손익분기점을 계산한다.'],['가격 실험','무료 제한·기본 유료·팀 플랜의 가치 차이와 이용량 제한을 적는다.'],['결제 서비스 선정','국내 PG/결제 대행사 제공 국가·심사·정기결제 조건 확인 후 샌드박스 연동.'],['구독 상태 테스트','결제성공·실패·취소·만료·중복웹훅·환불 시 권한을 검증한다.']],
-mission:'샌드박스 결제로 1건 구매와 1건 취소를 끝까지 재현하고 주문 상태를 기록한다.',checks:['호출 원가 및 손익 추정표가 있다','가격/한도/해지 안내가 명시됐다','결제 완료를 서버에서 검증한다','실패·취소·환불 상태를 구분한다'],pitfalls:['결제사별 사업자·심사 요건을 모르고 실결제부터 연결하지 않는다.','환불 불가 문구 하나로 소비자 청약철회 권리를 배제할 수 없다.'],refs:['ecommerceLaw','jocoding'],video:{time:tm(2,7,57),label:'글로벌 결제 구조 · 2:07:57'}
-},
-{
-id:'10',week:5,phase:'launch',title:'SEO 기술 실습 — 검색에 발견되기',sub:'검색엔진이 읽고 이해할 수 있는 페이지를 만든다.',result:'SEO 점검표 + 검색 콘솔',
-theory:['크롤링 → 색인 → 노출 → 클릭은 서로 다른 단계','검색 의도·고유 콘텐츠·제목·설명·H1·내부링크의 기본','robots.txt·sitemap.xml·canonical·구조화 데이터의 용도'],
-steps:[['기술 상태 점검','각 페이지 HTTP 200, 모바일 화면, 정규 URL, 인덱싱 차단 여부를 검사한다.'],['메타·본문 최적화','페이지별 제목·description·H1과 실제 질문에 답하는 본문·내부 링크를 작성.'],['검색 파일 준비','/robots.txt와 /sitemap.xml을 생성하고 유효한 URL만 포함한다.'],['Google Search Console','도메인 소유권 확인→사이트맵 제출→URL 검사→색인·검색성과 보고서 확인.']],
-mission:'홈/사용법/FAQ/가격 4개 페이지의 제목과 검색 의도, 색인 가능 여부를 표로 제출한다.',checks:['검색 차단 설정이 없다','페이지별 고유 제목·설명이 있다','사이트맵이 정상 응답한다','Search Console 소유권을 확인했다'],pitfalls:['사이트맵 제출이 검색 상위 노출을 보장하지 않는다.','AI 생성 글을 대량 복사해 저품질 페이지를 만들지 않는다.'],refs:['googleSEO','naverGuide'],video:{time:tm(1,35,32),label:'도메인·SEO/GEO 멤버십 안내 · 1:35:32'}
-},
-{
-id:'11',week:6,phase:'launch',title:'GEO — AI 검색에서 인용될 정보 만들기',sub:'ChatGPT·Google AI 검색 시대에 신뢰 가능한 출처 페이지를 설계한다.',result:'질문형 지식 페이지 3개',
-theory:['GEO(생성형 엔진 최적화)는 “마법 같은 등록”이 아니라 검색 접근성·신뢰·유용성 향상','2026 Google 공식 가이드는 별도 GEO 해킹이나 llms.txt를 검색 필수조건으로 보지 않음','주장별 근거·작성자·업데이트 날짜·실제 사례·기계가 읽을 수 있는 HTML이 중요'],
-steps:[['실제 질문 조사','고객 질문 20개를 수집하고 구매 전/사용 중/비교 검토로 묶는다.'],['답변형 문서 3개','질문→간결한 답→실제 사례→근거 자료→제품 안내 순으로 작성한다.'],['출처·신뢰 보강','대표/운영자 정보, 사용 예시, 원본 데이터/근거, 최신 수정일을 넣는다.'],['AI 검색 가설 점검','여러 검색·AI 서비스에서 노출/언급을 실험하되 동일 조건으로 기록하고 결과를 과장하지 않는다.']],
-mission:'자주 묻는 질문 하나를 “사람이 봐도 유익한 근거 중심 설명 페이지”로 게시한다.',checks:['실제 고객 질문 목록이 있다','공개 HTML로 읽을 수 있다','내용에 작성자·근거·날짜가 있다','GEO를 노출 보장으로 설명하지 않는다'],pitfalls:['llms.txt만 만들면 인용된다는 식의 근거 없는 약속을 하지 않는다.','실제 이용 후기나 전문가 추천을 AI로 지어내지 않는다.'],refs:['googleAI','aiFeatures','googleSEO'],video:{time:tm(1,35,32),label:'SEO/GEO 소개 · 1:35:32 (유료 심화 구간 주의)'}
-},
-{
-id:'12',week:6,phase:'launch',title:'국내외 검색 포털 실제 등록',sub:'Google, 네이버, Daum과 매장형 서비스의 카카오 등록을 구분해 완료한다.',result:'검색엔진별 등록·검증 기록',
-theory:['검색 색인은 “사이트 등록만 하면 바로 노출”되는 구조가 아님','네이버 서치어드바이저는 수집·색인 확인, Daum 검색등록은 별도 무료 등록 심사','카카오맵·네이버 플레이스·Google 비즈니스 프로필은 오프라인 실제 사업장에 적합'],
-steps:[['Google','Search Console 속성 추가→DNS/HTML 소유 확인→sitemap 제출→URL 검사.'],['네이버','서치어드바이저 웹마스터 도구→사이트 추가→메타태그/HTML 소유 확인→사이트맵·RSS(해당 시) 제출.'],['Daum','Daum 검색등록→신규등록→사이트 URL·소개·카테고리 제출→심사 결과 이메일 확인.'],['매장형 추가','실제 오프라인 매장이 있다면 카카오맵 매장관리·네이버 플레이스·Google 비즈니스 프로필을 별도 신청.']],
-mission:'Google/네이버/Daum의 등록 화면을 캡처하고 “제출·소유확인·색인/승인·노출” 상태를 구분한다.',checks:['Google 도메인 소유 확인','네이버 소유 확인 완료','Daum 등록 신청 또는 비대상 사유 기록','검색 노출 상태를 날짜별 추적한다'],pitfalls:['웹사이트 색인과 지도 매장 등록을 혼동하지 않는다.','제출·승인과 실제 검색 노출은 다를 수 있다.'],refs:['naver','naverGuide','daum','kakao'],video:{time:tm(1,35,32),label:'도메인/검색엔진 소개 · 1:35:32'}
-},
-{
-id:'13',week:7,phase:'grow',title:'Google Ads·네이버 광고 실습',sub:'적은 예산으로 첫 유료 고객을 찾되 반드시 전환을 측정한다.',result:'캠페인 기획안 + 측정 가능한 광고',
-theory:['Google Ads는 내가 광고비를 내고 고객을 유입시키는 광고주 제품','CPC·CTR·CVR·CPA·ROAS와 검색 의도·제외 키워드의 의미','광고비 집행 전 전환 이벤트와 예산 상한·중단 기준이 우선'],
-steps:[['광고 계정 준비','Google Ads 계정 개설→비즈니스 정보·결제·필요 시 광고주 인증 확인.'],['전환 측정','GA4 또는 Google 태그로 가입/구매/문의 등 실제 사업 전환을 정의·검증.'],['소액 검색 캠페인 설계','키워드·지역·언어·랜딩페이지·일예산·제외 키워드·광고문구 3종 구성.'],['국내 대체안 비교','네이버 광고주센터 검색광고와 Google Ads를 동일한 리드/CPA 기준으로 비교한다.']],
-mission:'실돈 투입 전 1페이지 캠페인 계획서 제출. 선택 실습만 본인 동의·본인 예산으로 집행한다.',checks:['전환 이벤트가 테스트에서 기록된다','일예산/총예산/중단조건을 기록했다','광고용 랜딩페이지가 준비됐다','광고 정책·광고주 인증 필요성을 확인했다'],pitfalls:['광고 시작을 위해 무조건 큰 결제액을 충전하지 않는다.','브랜드 키워드 광고 성과를 신규 고객 확보로 착각하지 않는다.'],refs:['googleAds','adsVerify','naverAds','ga4'],video:{time:tm(2,31,36),label:'퍼포먼스 마케팅 멤버십 안내 · 2:31:36'}
-},
-{
-id:'14',week:7,phase:'grow',title:'AdSense·콘텐츠·무료 유입',sub:'광고비를 쓰는 방법과 광고수익을 받는 방법을 확실히 분리한다.',result:'유입 채널별 콘텐츠 달력',
-theory:['AdSense는 내 콘텐츠/사이트에 광고를 게시해 수익을 받는 퍼블리셔 제품','SaaS 구독·제휴·디지털 상품·광고수익은 고객과 원가 구조가 다름','콘텐츠 성과는 조회수가 아니라 적합한 고객의 방문·가입·구매로 평가'],
-steps:[['사업모델 선택','광고 수익형 미디어인지 유료 도구인지 판단해 UX 충돌을 줄인다.'],['AdSense 절차 이해','신규 사이트 추가→소유 확인→정책 심사→Ready 상태→ads.txt·광고위치 점검.'],['콘텐츠 계획','고객의 검색 질문 10개에 대해 블로그·영상·짧은 데모 등 채널을 배치한다.'],['배포·추적','UTM 링크로 유입 출처를 구분하고 콘텐츠 발행 후 7일 지표를 비교한다.']],
-mission:'고객 질문을 푸는 글 2개, 30초 데모 1개, CTA 1개를 게시하거나 제작한다.',checks:['Ads와 AdSense의 차이를 설명한다','AdSense 심사 요건을 확인했다','채널별 2주 발행 계획이 있다','각 콘텐츠 CTA와 UTM이 준비됐다'],pitfalls:['콘텐츠 없이 광고 코드만 붙여 승인된다고 생각하지 않는다.','광고를 과하게 배치해 핵심 제품 사용 경험을 훼손하지 않는다.'],refs:['adsense','jocoding'],video:{time:tm(1,0,45),label:'애드센스 수익화 · 1:00:45'}
-},
-{
-id:'15',week:8,phase:'grow',title:'GA4·퍼널·지표 기반 개선',sub:'감이 아니라 실제 고객 행동 데이터로 다음 기능과 마케팅을 결정한다.',result:'실사용 퍼널 대시보드',
-theory:['방문→핵심 행동→가입→결제→재방문 전환 퍼널','AARRR(획득·활성·유지·수익·추천)과 사용자 이벤트의 구분','질적 피드백과 정량 분석을 함께 보는 방법'],
-steps:[['GA4 설치','계정·속성·웹 데이터 스트림 생성→측정 태그 설치→실시간 보고서 확인.'],['이벤트 설계','visit_landing, start_action, complete_action, sign_up, purchase 등 핵심 이벤트를 정의.'],['이탈 지점 점검','퍼널별 사용자 수·전환율을 기록하고 실제 사용성 문제 3개를 찾는다.'],['개선 실험','문구·버튼·온보딩 중 한 요소만 바꾸고 비교 기간/기준을 기록한다.']],
-mission:'“방문 100명 중 몇 명이 핵심 행동을 완료했는가?”를 계산하고 개선안을 제시한다.',checks:['GA4 실시간 데이터가 수신된다','핵심 이벤트 4개 이상 측정된다','퍼널 전환율을 계산했다','1개 개선 실험이 문서화됐다'],pitfalls:['동의·개인정보 이슈 검토 없이 추적 도구를 무작정 붙이지 않는다.','표본이 작은데 전환율 변화를 확정적 성과라고 말하지 않는다.'],refs:['ga4','jocoding'],video:{time:tm(1,20,0),label:'Google Analytics 설치 · 1:20:00'}
-},
-{
-id:'16',week:8,phase:'business',title:'사업자등록·통신판매업·행정 실무',sub:'한국에서 서비스를 실제 판매하는 주체로서 기본 신고와 준비를 이해한다.',result:'내 사업 행정 절차표',
-theory:['개인사업자·법인, 간이과세·일반과세, 업종코드 선택은 사업내용에 따라 달라짐','사업자등록과 통신판매업 신고는 별개 절차이며 판매형태별 적용을 확인해야 함','사업장·상호·영업 주소·환불 창구·정산계좌·PG 계약의 연결 관계'],
-steps:[['사업 유형 판단','B2C/B2B·국내/해외·구독/광고/용역·개인/법인을 표에 분류한다.'],['홈택스 사업자등록','업종코드·사업장 증빙·과세유형을 확인하고 온라인 신청 흐름을 연습한다.'],['통신판매업 신고 검토','정부24 적용 여부→구매안전서비스 확인증 등 필요 서류→해당 시 신고.'],['영업 준비 묶음','사업자번호·정산계좌·대표 연락처·증빙발행·계약서·환불창구를 체크한다.']],
-mission:'본인 서비스에 대한 “등록할 것 / 확인할 것 / 해당 없음” 3열 행정표를 완성한다.',checks:['사업자 형태·업종 분류를 검토했다','사업자등록 신청/정정 경로를 찾았다','통신판매업 신고 대상 여부를 확인했다','PG/세무/고객지원 준비 서류 목록이 있다'],pitfalls:['모든 웹사이트가 자동으로 통신판매업 신고 대상이라고 단정하지 않는다.','거짓 업종코드나 다른 사람 사업자번호를 사용하지 않는다.'],refs:['biz','ecommerce','tax'],video:{time:tm(2,51,49),label:'미국 법인 이야기(한국 행정 대체 불가) · 2:51:49'}
-},
-{
-id:'17',week:9,phase:'business',title:'개인정보·약관·환불·세무 체크',sub:'고객의 돈과 데이터를 다루는 사업자가 지켜야 할 기본 원칙을 점검한다.',result:'법무·정산 준비 체크 패키지',
-theory:['개인정보 처리방침, 서비스 이용약관, 유료 서비스 환불정책은 서로 목적이 다름','청약철회·디지털콘텐츠 제공 개시·예외 사유는 법정 요건을 따라 판단','부가가치세·종합소득세/법인세·세금계산서·현금영수증·국외 매출은 거래 구조에 따라 달라짐'],
-steps:[['개인정보 데이터 흐름','무슨 정보를 왜·얼마나 수집하고 누구에게 위탁/국외 이전하는지 그린다.'],['고지문·정책 초안','2026 개인정보위 작성지침에 따라 처리방침, 약관, 문의처, 파기·탈퇴 절차 초안 작성.'],['판매·환불 고지','가격·과금 주기·자동갱신·해지 방법·환불 시점·고객센터를 결제 전에 명시한다.'],['세무 운영표','매출/수수료/비용 증빙 보관, 부가세 신고, 정산대사 담당·일정을 달력에 기록.']],
-mission:'법무·세무 전문가에게 검토받을 질문 10개와 정책 페이지 초안을 만든다.',checks:['개인정보 처리방침 초안과 공개 위치가 있다','약관/해지/환불 안내가 연결된다','고객 데이터 삭제 요청 경로가 있다','세무 증빙·정산 점검 캘린더가 있다'],pitfalls:['AI가 쓴 법률문서를 검토 없이 그대로 게시하지 않는다.','“결제 후 환불 없음” 같은 단정으로 법정 권리를 제한하지 않는다.'],refs:['privacy','ecommerceLaw','tax'],video:{time:tm(2,50,19),label:'스토어 출시·사업 운영으로 확장 · 2:50:19'}
-},
-{
-id:'18',week:9,phase:'business',title:'운영·고객지원·최종 공개 런칭',sub:'첫 30일을 운영하고 다음 개선을 결정하는 창업자 루틴을 만든다.',result:'실서비스 + 30일 운영 계획',
-theory:['개발 완료와 사업 시작은 다르다: 장애·문의·결제·반품·비용이 반복됨','운영 우선순위: 보안·데이터 손실 → 결제 문제 → 핵심 오류 → 개선 기능','주간 지표·고객 인터뷰·비용 대사를 한 장으로 통제'],
-steps:[['런칭 체크','도메인/HTTPS, 기능 테스트, 법적 고지, 검색 콘솔, 고객센터, 백업·알림 확인.'],['고객지원 프로세스','문의를 접수해 분류/응답/해결/원인 분석하는 템플릿 작성.'],['주간 운영 루틴','매주 활성 사용자·핵심 행동·매출·AI 원가·광고비·CS를 20분간 리뷰.'],['최종 발표','3분 실서비스 시연 + 2분 원가/유입/법무 현황 + 1분 다음 30일 계획.']],
-mission:'다른 사람 3명에게 직접 이용하게 하고 실제 피드백과 수정 내역을 공개 시연한다.',checks:['운영 URL과 정상 기능이 있다','CS 및 장애 알림·복구 계획이 있다','첫 30일 KPI와 예산이 있다','6분 데모·사업 소개를 완성했다'],pitfalls:['고객 연락 수단 없이 광고부터 시작하지 않는다.','출시를 완료 선언으로 보지 말고 측정의 시작으로 본다.'],refs:['jocoding','course'],video:{time:tm(3,12,26),label:'조코딩 최종 정리 · 3:12:26'}
-}
+  {id:'01',week:1,phase:'plan',title:'AI, 제품, 1인 창업의 지도',sub:'AI를 모르는 사람도 서비스 비즈니스가 돌아가는 전체 흐름을 이해한다.',result:'서비스 구조도 1장',checkCount:4},
+  {id:'02',week:1,phase:'plan',title:'돈이 되는 문제 검증',sub:'코딩 전에 고객이 정말 필요로 하는 서비스인지 증거를 수집한다.',result:'고객 인터뷰 5건 + 검증표',checkCount:4},
+  {id:'03',week:2,phase:'plan',title:'MVP 설계와 AI 개발 지시서',sub:'비개발자도 AI 코딩 도구에 전달할 수 있는 설계 문서를 완성한다.',result:'PRD·화면 흐름·검수 기준',checkCount:4},
+  {id:'04',week:2,phase:'build',title:'웹 화면 만들기와 바이브 코딩',sub:'프롬프트로 실제 작동하는 반응형 화면을 만들고 직접 고친다.',result:'작동하는 프론트엔드',checkCount:4},
+  {id:'05',week:3,phase:'build',title:'AI API 연결과 비용 통제',sub:'프론트엔드를 실제 AI 결과를 내는 서비스로 바꾼다.',result:'AI 기능이 돌아가는 MVP',checkCount:4},
+  {id:'06',week:3,phase:'build',title:'DB·로그인·개인정보 최소 수집',sub:'사용자 데이터를 안전하게 저장하고 권한을 통제한다.',result:'DB·인증·기본 권한 테스트',checkCount:4},
+  {id:'07',week:4,phase:'build',title:'테스트·보안·운영 준비',sub:'“내 컴퓨터에서 됨”을 넘어 고객이 써도 괜찮은 품질로 만든다.',result:'출시 전 QA 리포트',checkCount:4},
+  {id:'08',week:4,phase:'build',title:'서비스 포팅·호스팅·도메인·배포',sub:'로컬 시제품을 실제 인터넷에 운영 가능한 서비스로 배포한다.',result:'HTTPS 공개 URL + 릴리스 기록',checkCount:4},
+  {id:'09',week:5,phase:'launch',title:'수익모델·가격·결제·구독',sub:'무료 사용자가 유료 고객이 되는 구조를 만들고 한 건의 거래를 안전하게 처리한다.',result:'가격표 + 테스트 결제 흐름',checkCount:4},
+  {id:'10',week:5,phase:'launch',title:'SEO 기술 실습 — 검색에 발견되기',sub:'검색엔진이 읽고 이해할 수 있는 페이지를 만든다.',result:'SEO 점검표 + 검색 콘솔',checkCount:4},
+  {id:'11',week:6,phase:'launch',title:'GEO — AI 검색에서 인용될 정보 만들기',sub:'ChatGPT·Google AI 검색 시대에 신뢰 가능한 출처 페이지를 설계한다.',result:'질문형 지식 페이지 3개',checkCount:4},
+  {id:'12',week:6,phase:'launch',title:'국내외 검색 포털 실제 등록',sub:'Google, 네이버, Daum과 매장형 서비스의 카카오 등록을 구분해 완료한다.',result:'검색엔진별 등록·검증 기록',checkCount:4},
+  {id:'13',week:7,phase:'grow',title:'Google Ads·네이버 광고 실습',sub:'적은 예산으로 첫 유료 고객을 찾되 반드시 전환을 측정한다.',result:'캠페인 기획안 + 측정 가능한 광고',checkCount:4},
+  {id:'14',week:7,phase:'grow',title:'AdSense·콘텐츠·무료 유입',sub:'광고비를 쓰는 방법과 광고수익을 받는 방법을 확실히 분리한다.',result:'유입 채널별 콘텐츠 달력',checkCount:4},
+  {id:'15',week:8,phase:'grow',title:'GA4·퍼널·지표 기반 개선',sub:'감이 아니라 실제 고객 행동 데이터로 다음 기능과 마케팅을 결정한다.',result:'실사용 퍼널 대시보드',checkCount:4},
+  {id:'16',week:8,phase:'business',title:'사업자등록·통신판매업·행정 실무',sub:'한국에서 서비스를 실제 판매하는 주체로서 기본 신고와 준비를 이해한다.',result:'내 사업 행정 절차표',checkCount:4},
+  {id:'17',week:9,phase:'business',title:'개인정보·약관·환불·세무 체크',sub:'고객의 돈과 데이터를 다루는 사업자가 지켜야 할 기본 원칙을 점검한다.',result:'법무·정산 준비 체크 패키지',checkCount:4},
+  {id:'18',week:9,phase:'business',title:'운영·고객지원·최종 공개 런칭',sub:'첫 30일을 운영하고 다음 개선을 결정하는 창업자 루틴을 만든다.',result:'실서비스 + 30일 운영 계획',checkCount:4}
 ];
 
 const $=(sel,root=document)=>root.querySelector(sel);
 const $$=(sel,root=document)=>Array.from(root.querySelectorAll(sel));
-const state={filter:'all',completed:new Set()};
-try{state.completed=new Set(JSON.parse(localStorage.getItem('launch-lab-completed')||'[]'));}catch(err){state.completed=new Set()}
+const state={filter:'all',completed:new Set(),session:{authenticated:false,unlocked:0},authLoading:true,authUnavailable:false};
 const phaseById=id=>phases.find(p=>p.id===id);
 const getChapter=id=>chapters.find(c=>c.id===id);
-const refLink=(key)=>{const r=sources[key];return `<a class="resource-link" href="${r.url}" target="_blank" rel="noopener noreferrer"><strong>${r.label}</strong><span>${r.note}</span></a>`};
-const doneCount=()=>chapters.reduce((sum,c)=>sum+c.checks.filter((_,i)=>state.completed.has(`${c.id}-${i}`)).length,0);
-const maxChecks=()=>chapters.reduce((sum,c)=>sum+c.checks.length,0);
-const chDone=c=>c.checks.every((_,i)=>state.completed.has(`${c.id}-${i}`));
+const refLink=key=>{const r=sources[key];return r?`<a class="resource-link" href="${r.url}" target="_blank" rel="noopener noreferrer"><strong>${r.label}</strong><span>${r.note}</span></a>`:''};
+const doneCount=()=>state.completed.size;
+const maxChecks=()=>chapters.reduce((sum,c)=>sum+c.checkCount,0);
+const chDone=c=>Array.from({length:c.checkCount},(_,i)=>state.completed.has(c.id+'-'+i)).every(Boolean);
+const isLocked=c=>!state.session.authenticated || chapters.indexOf(c)>=state.session.unlocked;
+const safeText=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+async function api(path,method='GET',body){
+  const response=await fetch(path,{method,credentials:'same-origin',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
+  let payload;
+  try{payload=await response.json();}catch(_){payload={error:'서버 응답을 확인할 수 없습니다.'};}
+  if(!response.ok)throw Object.assign(new Error(payload.error||'요청에 실패했습니다.'),{status:response.status});
+  if(!response.headers.get('content-type')?.includes('application/json') || payload.error)
+    throw Object.assign(new Error(payload.error||'회원 서버 연결 준비 중입니다.'),{status:503});
+  return payload;
+}
 function progress(){
-  const percent=Math.round(doneCount()/maxChecks()*100);
-  $('#side-progress-num').textContent=`${percent}%`;
-  $('#side-progress-bar').style.width=`${percent}%`;
+  const percent=state.session.authenticated?Math.round(doneCount()/maxChecks()*100):0;
+  $('#side-progress-num').textContent=percent+'%';
+  $('#side-progress-bar').style.width=percent+'%';
 }
-function saveProgress(){try{localStorage.setItem('launch-lab-completed',JSON.stringify([...state.completed]));}catch(err){}progress();}
+function setSession(data){
+  state.session=data||{authenticated:false,unlocked:0};
+  state.completed=new Set(data?.completed||[]);
+  state.authUnavailable=Boolean(data?.unavailable);
+  progress();updateAuthStatus();
+}
+function updateAuthStatus(){
+  const target=$('#auth-status');
+  if(!target)return;
+  if(state.session.authenticated){
+    target.innerHTML=`<span class="member-label" title="회원 계정">${safeText(state.session.email)}</span><button class="logout-btn" id="account-btn" type="button">계정 관리</button><button class="logout-btn" id="logout-btn" type="button">로그아웃</button>`;
+    $('#account-btn').addEventListener('click',showAccount);
+    $('#logout-btn').addEventListener('click',logout);
+  } else {
+    target.innerHTML=`<button class="auth-trigger primary" data-auth-open="signup" type="button">무료 회원가입</button><button class="auth-trigger" data-auth-open="login" type="button">로그인</button>`;
+  }
+}
+async function refreshSession(){
+  try{setSession(await api('/api/session'));}
+  catch(err){setSession({authenticated:false,unlocked:0,completed:[],unavailable:true});}
+  state.authLoading=false;route();
+}
+async function logout(){
+  try{await api('/api/logout','POST',{});}catch(err){window.alert('로그아웃하지 못했습니다. '+err.message);return;}
+  setSession({authenticated:false,unlocked:0,completed:[]});route();
+}
 function sideNav(current){
- let html=`<a href="#/" class="nav-link ${current==='home'?'active':''}"><span class="nav-number">◈</span> 전체 과정 요약</a>`;
- for(const p of phases){html+=`<div class="phase-nav-title">${p.number} / ${p.name}</div>`;
-   for(const c of chapters.filter(ch=>ch.phase===p.id)){html+=`<a href="#/chapter/${c.id}" class="nav-link ${current===c.id?'active':''}"><span class="nav-number">${c.id}</span><span>${c.title}</span>${chDone(c)?'<span class="nav-check" title="완료">✓</span>':''}</a>`;}
- }
- $('#side-nav').innerHTML=html;
+  let html=`<a href="#/" class="nav-link ${current==='home'?'active':''}" ${current==='home'?'aria-current="page"':''}><span class="nav-number">00</span><span>전체 과정 안내</span></a>`;
+  for(const p of phases){
+    html+=`<div class="phase-nav-title">${p.number} / ${p.name}</div>`;
+    for(const c of chapters.filter(ch=>ch.phase===p.id)){
+      const active=current===c.id;
+      const done=chDone(c)&&state.session.authenticated;
+      html+=`<a href="#/chapter/${c.id}" class="nav-link ${active?'active':''}" ${active?'aria-current="page"':''}><span class="nav-number">${c.id}</span><span>${c.title}</span>${done?'<span class="nav-check" title="완료">✓</span>':''}</a>`;
+    }
+  }
+  $('#side-nav').innerHTML=html;
 }
-function chapterCard(c){const p=phaseById(c.phase);return `<a class="chapter-card" href="#/chapter/${c.id}"><div class="card-top"><span class="chapter-badge">${c.id}강 · ${p.name}</span><span class="card-week">${c.week}주차 ${chDone(c)?'· ✓ 완료':''}</span></div><h3>${c.title}</h3><p>${c.sub}</p><div class="card-bottom"><span class="card-result">결과물 · ${c.result}</span><span class="card-go">내용 보기</span></div></a>`}
+function chapterCard(c){
+  const p=phaseById(c.phase),locked=isLocked(c);
+  const label=locked?(state.session.authenticated?'선행 수업 후 공개':'회원 전용'):'강의 열기';
+  return `<a class="chapter-card ${locked?'is-locked':''}" href="#/chapter/${c.id}"><div class="card-top"><span class="chapter-badge">LESSON ${c.id} <span>· ${p.name}</span></span><span class="card-week">${c.week}주차 ${chDone(c)&&state.session.authenticated?'· 완료':''}</span></div><h3>${c.title}</h3><p>${c.sub}</p><div class="card-bottom"><span class="card-result">실습 결과물 · ${c.result}</span><span class="card-go">${label}</span></div></a>`;
+}
 function renderOverview(){
   $('#breadcrumb').innerHTML='커리큘럼 <span>/</span> 전체 보기';document.title='전체 커리큘럼 | 런치랩';
   const displayed=state.filter==='all'?chapters:chapters.filter(c=>c.phase===state.filter);
   $('#page').innerHTML=`
-  <section class="hero"><div><div class="eyebrow">강사가 직접 진행하는 9주 실습 과정</div><h1>생각만 했던 서비스,<br><em>이제 직접 출시합니다.</em></h1><p class="intro">코딩을 잘 몰라도 괜찮습니다. 한 가지 문제를 정해 제품을 만들고, 직접 인터넷에 배포하고, 고객 반응과 비용을 확인하는 데까지 함께 갑니다. <strong>개발·SEO·GEO·광고·사업자 행정</strong>은 따로 외우는 과목이 아니라, 하나의 서비스를 운영하기 위한 실제 작업입니다.</p><div class="btn-row"><a class="btn" href="#/chapter/01">1강부터 살펴보기</a><a class="btn secondary" href="#roadmap">9주 수업 일정</a></div></div><div class="hero-art"><div class="art-head">우리가 만드는 과정</div><div class="art-code">문제 발견 <mark>→</mark><br>제품 출시 <mark>→</mark><br>첫 고객 <mark>→</mark> 운영</div><div class="art-foot"><div class="art-bar"></div><small>한 개의 서비스, 한 번의 실제 출시</small></div></div></section>
+  <section class="hero"><div><div class="eyebrow">실제로 만드는 사람들을 위한 실전 클래스</div><h1>아이디어를<br>실제 서비스로.<br><em>9주, 끝까지.</em></h1><p class="intro">AI를 처음 접해도 괜찮습니다. 기획에서 개발, 배포, 검색 노출, 고객 확보와 운영까지. <strong>하나의 서비스를 완성하는 과정</strong>을 차근차근 함께 진행합니다.</p><div class="btn-row"><a class="btn" href="#/chapter/01">첫 강의 살펴보기</a><a class="btn secondary" href="#roadmap">9주 커리큘럼</a></div></div><div class="hero-art"><div class="art-head"><span>THE LAUNCH PROCESS</span><span class="art-spark">✳</span></div><div class="art-stages"><div class="art-stage"><span class="art-num">01</span><div><strong>Discover</strong><small>시작할 문제를 찾고 검증합니다</small></div></div><div class="art-stage"><span class="art-num">02</span><div><strong>Build</strong><small>AI를 활용해 제품을 만듭니다</small></div></div><div class="art-stage"><span class="art-num">03</span><div><strong>Launch</strong><small>도메인과 결제를 연결합니다</small></div></div><div class="art-stage"><span class="art-num">04</span><div><strong>Grow</strong><small>고객을 만나고 서비스를 운영합니다</small></div></div></div><div class="art-foot"><div class="art-bar"></div><small>ONE SERVICE. REAL LAUNCH.</small></div></div></section>
   <div class="metric-grid"><div class="metric"><strong>09<span style="font-size:18px">주</span></strong><small>권장 교육 기간</small></div><div class="metric"><strong>18</strong><small>챕터별 상세 페이지</small></div><div class="metric"><strong>54<span style="font-size:18px">h</span></strong><small>주 2회 × 회당 3시간</small></div><div class="metric"><strong>01<span style="font-size:18px">개</span></strong><small>직접 출시할 서비스</small></div></div>
+  ${state.session.authenticated
+    ?`<div class="member-banner"><div><strong>이어서 학습할 시간입니다.</strong><p>현재 ${String(state.session.unlocked).padStart(2,'0')}강까지 열려 있습니다. 앞선 강의의 체크리스트를 완료하면 다음 강의가 열립니다.</p></div><a class="btn" href="#/chapter/${String(Math.min(18,state.session.unlocked)).padStart(2,'0')}">학습 이어가기</a></div>`
+    :`<div class="member-banner"><div><strong>미리 살펴보고, 회원으로 학습하세요.</strong><p>전체 커리큘럼과 강의 소개는 누구나 볼 수 있습니다. 상세 내용은 무료 가입 후 1강부터 순서대로 열립니다.</p></div><button class="btn" type="button" data-auth-open="signup">무료로 학습 시작</button></div>`}
   <section><div class="section-head"><div><div class="eyebrow">수업은 이렇게 진행됩니다</div><h2>하나의 서비스를 끝까지</h2></div><p>이론 약 20% · 실습 및 피드백 약 80% 권장</p></div><div class="phase-strip">${phases.map(p=>`<div class="phase-tile"><div class="phase-tag">${p.number}단계</div><h3>${p.name}</h3><p>${p.description}</p><div class="phase-range">${p.range}</div></div>`).join('')}</div></section>
   <section id="chapters"><div class="section-head"><div><div class="eyebrow">전체 강의 목차</div><h2>18개 강의, 18개의 실습 결과물</h2></div><p>각 강의: 필수 개념 · 작업 순서 · 과제 · 완료 조건 · 주의점 · 참고자료</p></div><div class="chapter-controls" role="group" aria-label="교육 단계 필터"><button class="chip" data-filter="all" aria-pressed="${state.filter==='all'}">전체 18강</button>${phases.map(p=>`<button class="chip" data-filter="${p.id}" aria-pressed="${state.filter===p.id}">${p.name}</button>`).join('')}</div><div class="chapter-grid" id="cards">${displayed.map(chapterCard).join('')}</div></section>
   <section id="roadmap"><div class="section-head"><div><div class="eyebrow">주차별 일정표</div><h2>9주 실습 로드맵</h2></div><p>강사가 수강생의 서비스 개별 멘토링을 병행하는 구성</p></div><div class="week-table">${Array.from({length:9},(_,i)=>{const a=chapters[i*2],b=chapters[i*2+1];return `<div class="week-row"><div>${i+1}주차</div><div>${a.title}<br>${b.title}</div><div>제출물: ${a.result} / ${b.result}</div></div>`}).join('')}</div></section>
@@ -182,13 +134,13 @@ function renderOverview(){
   <div class="week-row"><div>03</div><div>내 컴퓨터가 아닌 실제 인터넷</div><div>도메인·HTTPS·운영 설정·롤백을 포함해 외부에서 작동하게 한다.</div></div>
   <div class="week-row"><div>04</div><div>방문자보다 고객 행동</div><div>SEO·GEO·광고·GA4를 연결해 유입부터 결제까지 측정한다.</div></div>
   <div class="week-row"><div>05</div><div>개발자에서 사업 운영자로</div><div>사업자·환불·개인정보·세무·고객지원·손익을 직접 챙긴다.</div></div>
-  </div><p class="footnote" style="margin:-34px 0 52px">참고: 과정 설계에는 <a href="${VIDEO}" target="_blank" rel="noopener noreferrer">조코딩의 공개 1인 창업 강의</a>에서 다룬 MVP·배포·AI API·데이터·수익화의 핵심 주제도 반영했습니다. 이 수업은 별도의 독립 교육과정이며, 실제 진행과 설명은 담당 강사가 합니다.</p></section>
+  </div></section>
   <section class="closing-panel"><div><div class="eyebrow">최종 수료 기준</div><h2>수료는 ‘강의 시청’이 아니라 ‘실서비스 출시’</h2><p>운영 URL, 핵심 기능 시연, 도메인·검색 등록, 전환 측정, 정책·사업 준비표, 30일 운영 계획을 6분 발표로 확인합니다. 결제·신고·광고 집행은 개인 상황에 맞춰 실제 집행 또는 안전한 모의 실습으로 선택합니다.</p></div><a class="btn" href="#/chapter/18">최종 과제 보기</a></section>
-  <p class="footnote">2026년 11월 기준 실습형 강의계획서입니다. 법령·결제·검색·광고 서비스는 정책이 바뀔 수 있으므로 실습 당일 공식 문서를 다시 확인합니다. 참고 영상은 복습을 위한 선택 자료입니다.</p>`;
+  <p class="footnote">2026년 11월 기준 실습형 강의계획서입니다. 법령·결제·검색·광고 서비스는 정책이 바뀔 수 있으므로 실습 당일 공식 문서를 다시 확인합니다.</p>`;
   $$('.chip').forEach(btn=>btn.addEventListener('click',()=>{state.filter=btn.dataset.filter;$$('.chip').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));$('#cards').innerHTML=(state.filter==='all'?chapters:chapters.filter(c=>c.phase===state.filter)).map(chapterCard).join('');}));
 }
-function renderChapter(c){
-  const idx=chapters.indexOf(c),p=phaseById(c.phase),prev=chapters[idx-1],next=chapters[idx+1];
+function renderChapterFull(c){
+  const idx=chapters.findIndex(item=>item.id===c.id),p=phaseById(c.phase),prev=chapters[idx-1],next=chapters[idx+1];
   $('#breadcrumb').innerHTML=`커리큘럼 <span>/</span> ${c.id}강`;document.title=`${c.title} | 런치랩`;
   const count=c.checks.filter((_,i)=>state.completed.has(`${c.id}-${i}`)).length;
   const taskChecklist=c.checks.map((label,i)=>`<label class="check-item"><input type="checkbox" data-check="${c.id}-${i}" ${state.completed.has(`${c.id}-${i}`)?'checked':''}><span>${label}</span></label>`).join('');
@@ -201,18 +153,73 @@ function renderChapter(c){
   <section class="detail-section"><h2><span class="counter">03</span> 수업 종료 실습 미션 <small style="font-size:12px;color:#8996a9;font-weight:500">· 약 35분</small></h2><div class="exercise"><h3>오늘의 실전 미션</h3><p>${c.mission}</p><span class="deliverable">제출물 → ${c.result}</span></div></section>
   <p class="safe-disclaimer">* 수업시간은 권장 예시입니다. 외부 사업자 심사·서치엔진 색인·광고 승인·세무 신고 등은 수업 중 완료를 보장하지 않으며, 이 경우 신청/검증 단계의 증빙과 후속 확인 계획을 제출합니다.</p>
   </div><aside class="detail-side">
-  <div class="side-card"><div class="overline">수업 체크리스트</div><h3>오늘의 완료 조건</h3>${taskChecklist}<div class="count-text" id="chapter-count">${count} / ${c.checks.length} 완료</div></div>
+  <div class="side-card"><div class="overline">수업 체크리스트</div><h3>오늘의 완료 조건</h3>${taskChecklist}<div class="count-text" id="chapter-count">${count} / ${c.checks.length} 완료</div><p class="count-text">모든 항목을 완료하면 다음 강의가 열립니다. 수강생이 직접 확인하는 자기점검 방식입니다.</p><p class="count-text" id="unlock-notice" role="status"></p></div>
   <div class="notice-card"><h3>실무에서 자주 하는 실수</h3><ul>${c.pitfalls.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-  <div class="side-card"><div class="overline">공식 참고자료</div><h3>실습할 때 참고하기</h3>${c.refs.map(refLink).join('')}</div>
-  <div class="side-card video-card"><div class="overline">선택 복습 자료</div><h3>관련 영상 한 편</h3><strong>${c.video.label}</strong><p>조코딩의 공개 강의에서 같은 주제를 다룬 부분입니다. 본 수업과 별개의 참고자료이며 필수 시청은 아닙니다.</p><a href="${youtube(c.video.time)}" target="_blank" rel="noopener noreferrer">해당 구간 보기</a></div>
+  ${c.refs.length?`<div class="side-card"><div class="overline">공식 참고자료</div><h3>실습할 때 참고하기</h3>${c.refs.map(refLink).join('')}</div>`:''}
   </aside></div>
   <nav class="detail-bottom-nav" aria-label="앞뒤 챕터">${prev?`<a href="#/chapter/${prev.id}">← CH ${prev.id} 이전</a>`:`<a href="#/">← 전체 요약</a>`}<a href="#/chapter/${next?next.id:'01'}">${next?`다음 CH ${next.id} →`:'처음부터 다시 →'}</a></nav>`;
-  $$('input[data-check]').forEach(el=>el.addEventListener('change',()=>{if(el.checked)state.completed.add(el.dataset.check);else state.completed.delete(el.dataset.check);saveProgress();$('#chapter-count').textContent=`${c.checks.filter((_,i)=>state.completed.has(`${c.id}-${i}`)).length} / ${c.checks.length} 완료`;sideNav(c.id);}));
+  $$('input[data-check]').forEach(el=>el.addEventListener('change',async()=>{
+    el.disabled=true;
+    const before=state.session.unlocked;
+    const checkIndex=Number(el.dataset.check.split('-')[1]);
+    try{
+      const update=await api('/api/progress','POST',{chapterId:c.id,checkIndex,completed:el.checked});
+      setSession(update);
+      $('#chapter-count').textContent=c.checks.filter((_,i)=>state.completed.has(c.id+'-'+i)).length+' / '+c.checks.length+' 완료';
+      if(update.unlocked>before)$('#unlock-notice').textContent='다음 강의가 열렸습니다! 목차에서 바로 이동할 수 있어요.';
+      sideNav(c.id);
+    }catch(err){
+      el.checked=!el.checked;
+      $('#unlock-notice').textContent=err.message;
+    }finally{el.disabled=false;}
+  }));
+}
+function renderChapterTeaser(c){
+  const index=chapters.findIndex(item=>item.id===c.id);
+  const p=phaseById(c.phase);
+  const member=state.session.authenticated;
+  const previous=String(Math.max(1,state.session.unlocked||1)).padStart(2,'0');
+  $('#breadcrumb').innerHTML=`커리큘럼 <span>/</span> ${c.id}강 미리보기`;
+  document.title=c.title+' | 런치랩 미리보기';
+  $('#page').innerHTML=`
+    <section class="detail-hero"><div class="detail-kicker">LESSON ${c.id} <span>·</span> ${p.name} <span>·</span> ${c.week}주차</div>
+      <h1>${c.title}</h1><p class="detail-sub">${c.sub}</p>
+      <div class="detail-meta"><span class="mini-tag">3시간 실습</span><span class="mini-tag">결과물: ${c.result}</span><span class="mini-tag">회원 전용 본문</span></div>
+    </section>
+    <div class="preview-note"><span class="preview-dot">!</span><span><strong>여기까지는 누구나 볼 수 있습니다.</strong> 수업 이론·실습 단계·과제·참고자료는 회원에게 순서대로 공개됩니다.</span></div>
+    <div class="teaser-layout"><div class="teaser-card"><div class="eyebrow">COURSE PREVIEW</div>
+      <h2>읽고 끝나는 강의가 아니라,<br>직접 해보는 시간입니다.</h2>
+      <p>이번 수업에서는 ${c.sub} 강의 내용을 실제 서비스에 적용하고, 결과물인 <strong>‘${c.result}’</strong>을 완성하는 것이 목표입니다.</p>
+      <ul><li>핵심 개념을 짧고 쉽게 정리합니다.</li><li>강사의 실제 작업을 함께 따라 합니다.</li><li>과제와 완료 조건을 확인합니다.</li><li>실무에 필요한 공식 참고자료를 확인합니다.</li></ul>
+      <a class="btn secondary" style="color:#142137;border-color:#d7deea;margin-top:29px" href="#/">전체 커리큘럼 보기</a>
+    </div><aside class="lock-panel"><span class="lock-symbol">${member?'◷':'✳'}</span><small>${member?'PREREQUISITE REQUIRED':'MEMBERS ONLY'}</small>
+      <h3>${member?'이전 강의를 먼저 완료해 주세요.':'회원가입하면 1강부터 열립니다.'}</h3>
+      <p>${member
+        ?'현재 '+previous+'강까지 학습할 수 있습니다. 앞선 수업의 체크리스트를 모두 완료하면 다음 강의가 자동으로 열립니다.'
+        :'무료로 가입하면 1강 본문이 열립니다. 회원별 진도는 계정에 저장되고 다음 강의가 순차적으로 공개됩니다.'}</p>
+      ${member
+        ?`<a class="btn" href="#/chapter/${previous}">${previous}강 학습하기</a>`
+        :`<button class="btn" type="button" data-auth-open="signup">무료 회원가입</button><button class="btn secondary" style="margin-top:10px;width:100%" type="button" data-auth-open="login">기존 회원 로그인</button>`}
+    </aside></div>`;
+}
+async function openChapter(c){
+  if(isLocked(c)){renderChapterTeaser(c);return;}
+  $('#page').innerHTML='<div class="lesson-loading" role="status">강의 내용을 불러오고 있습니다…</div>';
+  try{
+    const payload=await api('/api/chapter/'+c.id);
+    if(location.hash!=='#/chapter/'+c.id)return;
+    renderChapterFull({...c,...payload.chapter});
+  }catch(err){
+    if(location.hash!=='#/chapter/'+c.id)return;
+    if(err.status===401){setSession({authenticated:false,unlocked:0,completed:[]});renderChapterTeaser(c);}
+    else if(err.status===403){await refreshSession();renderChapterTeaser(c);}
+    else $('#page').innerHTML=`<div class="lesson-loading">${safeText(err.message)}<p><a class="btn secondary" href="#/">커리큘럼 돌아가기</a></p></div>`;
+  }
 }
 function route(){
   const path=location.hash.replace(/^#\/?/,'').split('/').filter(Boolean);
   const c=path[0]==='chapter'?getChapter(path[1]):null;
-  if(c){renderChapter(c);sideNav(c.id);}else{renderOverview();sideNav('home');}
+  if(c){openChapter(c);sideNav(c.id);}else{renderOverview();sideNav('home');}
   progress();
   if(path[0]==='roadmap')requestAnimationFrame(()=>$('#roadmap')?.scrollIntoView({behavior:'smooth'}));
   else window.scrollTo({top:0,behavior:'instant'});
@@ -222,4 +229,86 @@ function route(){
 const overlay=document.createElement('div');overlay.className='mobile-overlay';overlay.hidden=true;document.body.append(overlay);
 function closeMenu(){$('#sidebar').classList.remove('open');$('#menu-btn').setAttribute('aria-expanded','false');overlay.hidden=true;}
 $('#menu-btn').addEventListener('click',()=>{const isOpen=$('#sidebar').classList.toggle('open');$('#menu-btn').setAttribute('aria-expanded',String(isOpen));overlay.hidden=!isOpen;});overlay.addEventListener('click',closeMenu);
-window.addEventListener('hashchange',route);route();
+const authRoot=document.createElement('div');authRoot.id='auth-root';document.body.append(authRoot);
+function closeAuth(){
+  authRoot.replaceChildren();
+  document.body.classList.remove('modal-open');
+}
+function showAuth(mode='signup'){
+  if(state.session.authenticated)return;
+  const signup=mode==='signup';
+  authRoot.innerHTML=`<div class="auth-modal"><div class="auth-backdrop" data-auth-close></div>
+    <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-heading">
+    <button class="auth-close" type="button" data-auth-close aria-label="닫기">×</button>
+    <span class="auth-logo">L.</span>
+    <h2 id="auth-heading">${signup?'배움을 시작해 볼까요?':'다시 만나 반갑습니다.'}</h2>
+    <p class="auth-intro">${signup?'무료 회원가입 후 1강부터 시작하고, 수업을 완료할 때마다 다음 강의를 열어보세요.':'가입한 이메일과 비밀번호로 로그인하면 내 학습 진도를 이어갈 수 있습니다.'}</p>
+    <div class="auth-tabs"><button type="button" class="${signup?'active':''}" data-auth-mode="signup">회원가입</button><button type="button" class="${!signup?'active':''}" data-auth-mode="login">로그인</button></div>
+    <form class="auth-form" id="auth-form">
+      <div class="auth-field"><label for="auth-email">이메일</label><input id="auth-email" type="email" name="email" placeholder="name@example.com" autocomplete="email" maxlength="254" required></div>
+      <div class="auth-field"><label for="auth-password">비밀번호</label><input id="auth-password" type="password" name="password" placeholder="${signup?'10자 이상 입력':'비밀번호 입력'}" autocomplete="${signup?'new-password':'current-password'}" minlength="10" maxlength="128" required></div>
+      ${signup?`<div class="auth-field"><label for="auth-confirm">비밀번호 확인</label><input id="auth-confirm" type="password" name="confirm" autocomplete="new-password" minlength="10" maxlength="128" required></div>
+      <label class="consent-row"><input type="checkbox" name="terms" required><span><a href="terms.html" target="_blank" rel="noopener">이용약관</a>과 <a href="privacy.html" target="_blank" rel="noopener">개인정보 처리방침</a>에 동의합니다.</span></label>`:''}
+      <p class="auth-feedback" id="auth-feedback" role="alert"></p>
+      <button type="submit" class="auth-submit">${signup?'무료로 가입하고 시작하기':'로그인하고 이어서 학습'}</button>
+    </form>
+    <p class="auth-note">${signup?'이메일 인증 및 비밀번호 재설정은 운영 전 추가될 예정입니다.':'비밀번호를 잊었다면 twinspa0713@gmail.com으로 문의해 주세요.'}</p>
+    </section></div>`;
+  document.body.classList.add('modal-open');
+  $$('[data-auth-close]',authRoot).forEach(el=>el.addEventListener('click',closeAuth));
+  $$('[data-auth-mode]',authRoot).forEach(el=>el.addEventListener('click',()=>showAuth(el.dataset.authMode)));
+  $('#auth-email',authRoot)?.focus();
+  $('#auth-form',authRoot).addEventListener('submit',async event=>{
+    event.preventDefault();
+    const form=event.currentTarget;
+    const feedback=$('#auth-feedback',authRoot);
+    const submit=form.querySelector('[type=submit]');
+    const fd=new FormData(form);
+    if(signup && fd.get('password')!==fd.get('confirm')){feedback.textContent='비밀번호가 서로 다릅니다.';return;}
+    if(signup && fd.get('terms')!=='on'){feedback.textContent='필수 약관에 동의해 주세요.';return;}
+    submit.disabled=true;submit.textContent='처리 중입니다…';feedback.textContent='';
+    try{
+      const member=await api(signup?'/api/signup':'/api/login','POST',{
+        email:fd.get('email'),password:fd.get('password'),acceptedTerms:signup,
+      });
+      setSession(member);closeAuth();route();
+    }catch(err){
+      feedback.textContent=state.authUnavailable?'회원 서버 연결 준비 중입니다. Cloudflare 데이터베이스 설정 후 이용할 수 있습니다.':err.message;
+    }finally{
+      if(submit.isConnected){submit.disabled=false;submit.textContent=signup?'무료로 가입하고 시작하기':'로그인하고 이어서 학습';}
+    }
+  });
+}
+function showAccount(){
+  if(!state.session.authenticated)return;
+  authRoot.innerHTML=`<div class="auth-modal"><div class="auth-backdrop" data-auth-close></div>
+  <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="account-title">
+  <button class="auth-close" type="button" data-auth-close aria-label="닫기">×</button>
+  <span class="auth-logo">L.</span><h2 id="account-title">내 계정 관리</h2>
+  <p class="auth-intro">현재 계정: ${safeText(state.session.email)}</p>
+  <form id="delete-form" class="auth-form">
+    <div class="auth-field"><label for="delete-password">회원 탈퇴를 위한 비밀번호 확인</label><input id="delete-password" type="password" name="password" autocomplete="current-password" required></div>
+    <p class="auth-note">탈퇴하면 계정 및 학습 체크 기록이 삭제되며 복원할 수 없습니다.</p>
+    <p class="auth-feedback" id="delete-feedback" role="alert"></p>
+    <button class="auth-submit" type="submit">계정과 진도 기록 삭제</button>
+  </form></section></div>`;
+  document.body.classList.add('modal-open');
+  $$('[data-auth-close]',authRoot).forEach(el=>el.addEventListener('click',closeAuth));
+  $('#delete-form',authRoot).addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(!window.confirm('계정과 진도 기록을 영구 삭제하시겠습니까?'))return;
+    const submit=event.currentTarget.querySelector('[type=submit]');submit.disabled=true;
+    try{
+      await api('/api/delete-account','POST',{password:new FormData(event.currentTarget).get('password')});
+      closeAuth();setSession({authenticated:false,unlocked:0,completed:[]});route();
+    }catch(err){$('#delete-feedback',authRoot).textContent=err.message;submit.disabled=false;}
+  });
+}
+document.addEventListener('click',event=>{
+  const open=event.target.closest('[data-auth-open]');
+  if(open){event.preventDefault();showAuth(open.dataset.authOpen||'signup');}
+});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&authRoot.children.length)closeAuth();});
+window.addEventListener('hashchange',route);
+route();
+refreshSession();

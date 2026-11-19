@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+.audit-build/
+.upstream-review/
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+*.log
