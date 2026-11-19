@@ -2,7 +2,10 @@
   "name": "education",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-11-19",
-  "vars": { "REGISTRATION_OPEN": "true" },
+  "vars": {
+    "REGISTRATION_OPEN": "true",
+    "GOOGLE_CLIENT_ID": "687250501389-5s8ci85im40nao9sm4m7c28dkmipir8u.apps.googleusercontent.com"
+  },
   "d1_databases": [
     {
       "binding": "DB",
