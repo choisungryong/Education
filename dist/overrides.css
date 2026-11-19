@@ -1,0 +1,2 @@
+.chip[aria-pressed="true"]{color:var(--ink);background:var(--accent);border-color:var(--accent)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
