@@ -1,23 +1,189 @@
 const sources={
-  cloudflare:{label:'Cloudflare Pages 공식 문서',url:'https://developers.cloudflare.com/pages/',note:'정적 웹 배포 및 도메인 연결'},
-  github:{label:'GitHub Pages 공식 문서',url:'https://docs.github.com/en/pages',note:'정적 페이지 무료 호스팅'},
-  googleSEO:{label:'Google SEO 시작 가이드',url:'https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko',note:'검색 친화성 공식 안내'},
-  googleAI:{label:'Google AI 검색 최적화 공식 가이드',url:'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide',note:'GEO 과장 정보 구별을 위한 2026 안내'},
-  aiFeatures:{label:'Google AI 기능 및 웹사이트',url:'https://developers.google.com/search/docs/appearance/ai-features?hl=ko',note:'AI 개요·AI 모드와 색인 요건'},
-  naver:{label:'네이버 서치어드바이저',url:'https://searchadvisor.naver.com/start',note:'사이트 등록·소유 확인·검색 현황'},
-  naverGuide:{label:'네이버 소유 확인 가이드',url:'https://searchadvisor.naver.com/guide/faq-start-register',note:'HTML 파일·메타태그 방식'},
-  daum:{label:'Daum 검색등록',url:'https://register.search.daum.net/',note:'무료 신규 등록·검토 신청'},
-  kakao:{label:'카카오비즈니스 매장관리',url:'https://business.kakao.com/info/mystore',note:'오프라인 매장이 있는 경우'},
-  googleAds:{label:'Google Ads 계정 만들기',url:'https://support.google.com/google-ads/answer/6366720?hl=ko',note:'광고주 계정·예산·결제·전환'},
-  adsVerify:{label:'Google 광고주 인증 안내',url:'https://support.google.com/adspolicy/answer/15577076',note:'요청 시 사업·신원 확인'},
-  naverAds:{label:'네이버 광고주센터',url:'https://searchad.naver.com/',note:'국내 검색광고'},
-  adsense:{label:'Google AdSense 사이트 추가',url:'https://support.google.com/adsense/answer/12169212?hl=ko',note:'광고를 게시해 수익을 얻는 별도 제품'},
-  ga4:{label:'GA4 웹사이트 설치 공식 가이드',url:'https://support.google.com/analytics/answer/9304153?hl=ko',note:'계정·속성·웹 데이터 스트림'},
-  biz:{label:'국세청 사업자등록 신청',url:'https://ems.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7777&mi=2444',note:'개시 전 또는 개시 후 20일 이내 신청'},
-  ecommerce:{label:'정부24 통신판매업 신고',url:'https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=11300000006&HighCtgCD=A09006&Mcode=10020',note:'해당 시 온라인 신고 및 제출서류'},
-  privacy:{label:'개인정보위 2026 안내서 목록',url:'https://pipc.go.kr/np/cop/bbs/selectBoardList.do?bbsId=BS217&mCode=G010030020',note:'2026.4 개인정보 처리방침 지침 확인'},
-  ecommerceLaw:{label:'전자상거래법 제17조',url:'https://www.law.go.kr/법령/전자상거래법/제17조',note:'청약철회와 디지털콘텐츠 예외'},
-  tax:{label:'국세청 홈택스',url:'https://www.hometax.go.kr/',note:'사업자등록·증빙·신고'},
+  "cloudflare": {
+    "label": "Cloudflare Pages",
+    "url": "https://developers.cloudflare.com/pages/",
+    "note": "기존 Pages 프로젝트·Functions 운영"
+  },
+  "workersAssets": {
+    "label": "Workers Static Assets",
+    "url": "https://developers.cloudflare.com/workers/static-assets/",
+    "note": "정적 파일과 서버 API의 배포 방식"
+  },
+  "cloudflareD1": {
+    "label": "Cloudflare D1",
+    "url": "https://developers.cloudflare.com/d1/",
+    "note": "서버 DB 연결·마이그레이션·복구"
+  },
+  "githubActions": {
+    "label": "GitHub Actions",
+    "url": "https://docs.github.com/en/actions",
+    "note": "의존성 설치·테스트·배포 자동화"
+  },
+  "vite": {
+    "label": "Vite 시작 가이드",
+    "url": "https://vite.dev/guide/",
+    "note": "개발 서버·빌드·지원 환경"
+  },
+  "nextjs": {
+    "label": "Next.js 설치 가이드",
+    "url": "https://nextjs.org/docs/app/getting-started/installation",
+    "note": "프레임워크 설치·실행 환경"
+  },
+  "accessibility": {
+    "label": "W3C 접근성 기초",
+    "url": "https://www.w3.org/WAI/fundamentals/accessibility-intro/",
+    "note": "키보드·라벨·접근성 점검"
+  },
+  "aiTools": {
+    "label": "OpenAI API 도구 사용",
+    "url": "https://developers.openai.com/api/docs/guides/tools",
+    "note": "검색·도구 호출과 실행 흐름"
+  },
+  "structuredOutputs": {
+    "label": "구조화 출력",
+    "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "note": "JSON Schema·거절·불완전 응답 처리"
+  },
+  "aiRetrieval": {
+    "label": "검색과 Retrieval",
+    "url": "https://developers.openai.com/api/docs/guides/retrieval",
+    "note": "문서 검색과 근거 기반 응답"
+  },
+  "claudeTools": {
+    "label": "Anthropic 도구 호출",
+    "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works",
+    "note": "도구 정의·호출·결과 처리"
+  },
+  "mcp": {
+    "label": "MCP 아키텍처",
+    "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+    "note": "AI 앱·도구·데이터 연결의 역할"
+  },
+  "supabaseRls": {
+    "label": "Supabase 행 수준 보안",
+    "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+    "note": "RLS·사용자 소유권·서버 키"
+  },
+  "googleIdentity": {
+    "label": "Google ID 토큰 검증",
+    "url": "https://developers.google.com/identity/gsi/web/guides/verify-google-id-token",
+    "note": "서버 서명·대상 클라이언트·만료 검증"
+  },
+  "tossPayments": {
+    "label": "토스페이먼츠 결제 연동",
+    "url": "https://docs.tosspayments.com/guides/v2/payment-widget/integration",
+    "note": "서버 주문 검증·결제 승인"
+  },
+  "googleSEO": {
+    "label": "Google SEO 시작 가이드",
+    "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=ko",
+    "note": "공개 페이지의 수집·색인·콘텐츠"
+  },
+  "googleRobots": {
+    "label": "Google 크롤링·색인 제어",
+    "url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=ko",
+    "note": "robots.txt의 용도와 한계"
+  },
+  "googleAI": {
+    "label": "Google AI 검색 최적화 가이드",
+    "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "note": "AI 검색·llms.txt에 관한 공식 설명"
+  },
+  "aiFeatures": {
+    "label": "Google AI 기능과 웹사이트",
+    "url": "https://developers.google.com/search/docs/appearance/ai-features?hl=ko",
+    "note": "검색 접근 조건·콘텐츠 원칙"
+  },
+  "bing": {
+    "label": "Bing Webmaster Tools",
+    "url": "https://www.bing.com/webmasters/about",
+    "note": "사이트 소유권·사이트맵·검사"
+  },
+  "naver": {
+    "label": "네이버 서치어드바이저",
+    "url": "https://searchadvisor.naver.com/start",
+    "note": "사이트 소유권·수집 상태"
+  },
+  "naverGuide": {
+    "label": "네이버 소유 확인 가이드",
+    "url": "https://searchadvisor.naver.com/guide/faq-start-register",
+    "note": "HTML 파일·메타태그 확인"
+  },
+  "daum": {
+    "label": "Daum 검색등록",
+    "url": "https://register.search.daum.net/",
+    "note": "등록 대상·신청 가능 여부 확인"
+  },
+  "kakao": {
+    "label": "카카오비즈니스 매장관리",
+    "url": "https://business.kakao.com/info/mystore",
+    "note": "매장형 서비스 자격·등록 확인"
+  },
+  "googleAds": {
+    "label": "Google Ads 계정 만들기",
+    "url": "https://support.google.com/google-ads/answer/6366720?hl=ko",
+    "note": "광고 계정·사업 정보·결제"
+  },
+  "adsVerify": {
+    "label": "Google 광고주 인증",
+    "url": "https://support.google.com/adspolicy/answer/15577076",
+    "note": "요청되는 인증 절차 확인"
+  },
+  "adsBudget": {
+    "label": "Google Ads 평균 일일 예산",
+    "url": "https://support.google.com/google-ads/answer/1704443?hl=ko",
+    "note": "초과게재·청구 한도 확인"
+  },
+  "naverAds": {
+    "label": "네이버 광고주센터",
+    "url": "https://searchad.naver.com/",
+    "note": "국내 검색광고·성과 관리"
+  },
+  "adsense": {
+    "label": "AdSense 사이트 추가",
+    "url": "https://support.google.com/adsense/answer/12169212?hl=ko",
+    "note": "소유 확인·검토 상태·광고 게시"
+  },
+  "ga4": {
+    "label": "GA4 웹사이트 설치",
+    "url": "https://support.google.com/analytics/answer/9304153?hl=ko",
+    "note": "속성·웹 스트림·태그 설치"
+  },
+  "ga4KeyEvents": {
+    "label": "GA4 주요 이벤트와 전환",
+    "url": "https://support.google.com/analytics/answer/13965727?hl=ko",
+    "note": "주요 이벤트·Google Ads 전환 구분"
+  },
+  "ga4Events": {
+    "label": "GA4 권장 이벤트",
+    "url": "https://developers.google.com/analytics/devguides/collection/ga4/reference/events",
+    "note": "가입·로그인·구매 이벤트 형식"
+  },
+  "biz": {
+    "label": "국세청 사업자등록 신청",
+    "url": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7776&mi=2444",
+    "note": "신청 시기·요건·제출 절차"
+  },
+  "ecommerce": {
+    "label": "정부24 통신판매업 신고",
+    "url": "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=11300000006&HighCtgCD=A09006&Mcode=10020",
+    "note": "본인 거래 구조에 맞는 대상·서류 확인"
+  },
+  "privacy": {
+    "label": "2026 개인정보 처리방침 작성지침",
+    "url": "https://www.privacy.go.kr/front/bbs/bbsView.do?bbsNo=BBSMSTR_000000000049&bbscttNo=20885",
+    "note": "개인정보 포털 공식 작성지침"
+  },
+  "ecommerceLaw": {
+    "label": "전자상거래법 제17조",
+    "url": "https://www.law.go.kr/법령/전자상거래법/제17조",
+    "note": "청약철회·디지털콘텐츠 관련 요건"
+  },
+  "tax": {
+    "label": "국세청 홈택스",
+    "url": "https://www.hometax.go.kr/",
+    "note": "사업자등록·증빙·신고 안내"
+  }
 };
 const phases=[
   {id:'plan',number:'01',name:'생각을 상품으로',description:'AI 이해, 고객 문제 발굴, 판매 가능한 MVP 설계',range:'CH 01–03'},
@@ -27,24 +193,168 @@ const phases=[
   {id:'business',number:'05',name:'진짜 사업 운영',description:'사업자 행정, 법무·세무, 장애대응, 최종 출시',range:'CH 16–18'},
 ];
 const chapters=[
-  {id:'01',week:1,phase:'plan',title:'AI, 제품, 1인 창업의 지도',sub:'AI를 모르는 사람도 서비스 비즈니스가 돌아가는 전체 흐름을 이해한다.',result:'서비스 구조도 1장',checkCount:4},
-  {id:'02',week:1,phase:'plan',title:'돈이 되는 문제 검증',sub:'코딩 전에 고객이 정말 필요로 하는 서비스인지 증거를 수집한다.',result:'고객 인터뷰 5건 + 검증표',checkCount:4},
-  {id:'03',week:2,phase:'plan',title:'MVP 설계와 AI 개발 지시서',sub:'비개발자도 AI 코딩 도구에 전달할 수 있는 설계 문서를 완성한다.',result:'PRD·화면 흐름·검수 기준',checkCount:4},
-  {id:'04',week:2,phase:'build',title:'웹 화면 만들기와 바이브 코딩',sub:'프롬프트로 실제 작동하는 반응형 화면을 만들고 직접 고친다.',result:'작동하는 프론트엔드',checkCount:4},
-  {id:'05',week:3,phase:'build',title:'AI API 연결과 비용 통제',sub:'프론트엔드를 실제 AI 결과를 내는 서비스로 바꾼다.',result:'AI 기능이 돌아가는 MVP',checkCount:4},
-  {id:'06',week:3,phase:'build',title:'DB·로그인·개인정보 최소 수집',sub:'사용자 데이터를 안전하게 저장하고 권한을 통제한다.',result:'DB·인증·기본 권한 테스트',checkCount:4},
-  {id:'07',week:4,phase:'build',title:'테스트·보안·운영 준비',sub:'“내 컴퓨터에서 됨”을 넘어 고객이 써도 괜찮은 품질로 만든다.',result:'출시 전 QA 리포트',checkCount:4},
-  {id:'08',week:4,phase:'build',title:'서비스 포팅·호스팅·도메인·배포',sub:'로컬 시제품을 실제 인터넷에 운영 가능한 서비스로 배포한다.',result:'HTTPS 공개 URL + 릴리스 기록',checkCount:4},
-  {id:'09',week:5,phase:'launch',title:'수익모델·가격·결제·구독',sub:'무료 사용자가 유료 고객이 되는 구조를 만들고 한 건의 거래를 안전하게 처리한다.',result:'가격표 + 테스트 결제 흐름',checkCount:4},
-  {id:'10',week:5,phase:'launch',title:'SEO 기술 실습 — 검색에 발견되기',sub:'검색엔진이 읽고 이해할 수 있는 페이지를 만든다.',result:'SEO 점검표 + 검색 콘솔',checkCount:4},
-  {id:'11',week:6,phase:'launch',title:'GEO — AI 검색에서 인용될 정보 만들기',sub:'ChatGPT·Google AI 검색 시대에 신뢰 가능한 출처 페이지를 설계한다.',result:'질문형 지식 페이지 3개',checkCount:4},
-  {id:'12',week:6,phase:'launch',title:'국내외 검색 포털 실제 등록',sub:'Google, 네이버, Daum과 매장형 서비스의 카카오 등록을 구분해 완료한다.',result:'검색엔진별 등록·검증 기록',checkCount:4},
-  {id:'13',week:7,phase:'grow',title:'Google Ads·네이버 광고 실습',sub:'적은 예산으로 첫 유료 고객을 찾되 반드시 전환을 측정한다.',result:'캠페인 기획안 + 측정 가능한 광고',checkCount:4},
-  {id:'14',week:7,phase:'grow',title:'AdSense·콘텐츠·무료 유입',sub:'광고비를 쓰는 방법과 광고수익을 받는 방법을 확실히 분리한다.',result:'유입 채널별 콘텐츠 달력',checkCount:4},
-  {id:'15',week:8,phase:'grow',title:'GA4·퍼널·지표 기반 개선',sub:'감이 아니라 실제 고객 행동 데이터로 다음 기능과 마케팅을 결정한다.',result:'실사용 퍼널 대시보드',checkCount:4},
-  {id:'16',week:8,phase:'business',title:'사업자등록·통신판매업·행정 실무',sub:'한국에서 서비스를 실제 판매하는 주체로서 기본 신고와 준비를 이해한다.',result:'내 사업 행정 절차표',checkCount:4},
-  {id:'17',week:9,phase:'business',title:'개인정보·약관·환불·세무 체크',sub:'고객의 돈과 데이터를 다루는 사업자가 지켜야 할 기본 원칙을 점검한다.',result:'법무·정산 준비 체크 패키지',checkCount:4},
-  {id:'18',week:9,phase:'business',title:'운영·고객지원·최종 공개 런칭',sub:'첫 30일을 운영하고 다음 개선을 결정하는 창업자 루틴을 만든다.',result:'실서비스 + 30일 운영 계획',checkCount:4}
+  {
+    "id": "01",
+    "week": 1,
+    "phase": "plan",
+    "title": "생성형 AI·에이전트와 서비스의 구조",
+    "sub": "챗봇, 멀티모달 AI, 도구를 사용하는 에이전트의 차이를 알고 만들 서비스의 범위를 정한다.",
+    "result": "서비스 구조도 1장",
+    "checkCount": 4
+  },
+  {
+    "id": "02",
+    "week": 1,
+    "phase": "plan",
+    "title": "돈이 되는 문제 검증",
+    "sub": "코딩 전에 고객이 정말 필요로 하는 서비스인지 증거를 수집한다.",
+    "result": "고객 인터뷰 5건 + 검증표",
+    "checkCount": 4
+  },
+  {
+    "id": "03",
+    "week": 2,
+    "phase": "plan",
+    "title": "MVP 설계와 AI 코딩 에이전트 활용",
+    "sub": "요구사항·작업 지침·검수 기준을 만들고 AI가 낸 코드 변경을 검토하는 흐름을 익힌다.",
+    "result": "PRD·화면 흐름·검수 기준",
+    "checkCount": 4
+  },
+  {
+    "id": "04",
+    "week": 2,
+    "phase": "build",
+    "title": "웹 화면 만들기와 바이브 코딩",
+    "sub": "프롬프트로 실제 작동하는 반응형 화면을 만들고 직접 고친다.",
+    "result": "작동하는 프론트엔드",
+    "checkCount": 4
+  },
+  {
+    "id": "05",
+    "week": 3,
+    "phase": "build",
+    "title": "AI API·구조화 출력·검색과 비용 통제",
+    "sub": "서버에서 AI API를 연결하고 구조화 출력·검색·도구 호출을 비용과 품질 기준으로 검증한다.",
+    "result": "AI 기능이 돌아가는 MVP",
+    "checkCount": 4
+  },
+  {
+    "id": "06",
+    "week": 3,
+    "phase": "build",
+    "title": "DB·Google 로그인·사용자별 접근 권한",
+    "sub": "이메일·Google 인증과 서버 세션을 구분하고 다른 회원의 데이터 접근을 차단한다.",
+    "result": "DB·인증·기본 권한 테스트",
+    "checkCount": 4
+  },
+  {
+    "id": "07",
+    "week": 4,
+    "phase": "build",
+    "title": "AI 품질 평가·보안·자동 테스트",
+    "sub": "기능 테스트와 AI 결과 평가를 분리하고 프롬프트 인젝션·권한·비용 실패를 점검한다.",
+    "result": "출시 전 QA 리포트",
+    "checkCount": 4
+  },
+  {
+    "id": "08",
+    "week": 4,
+    "phase": "build",
+    "title": "서비스 포팅·호스팅·도메인·배포",
+    "sub": "로컬 시제품을 실제 인터넷에 운영 가능한 서비스로 배포한다.",
+    "result": "HTTPS 공개 URL + 릴리스 기록",
+    "checkCount": 4
+  },
+  {
+    "id": "09",
+    "week": 5,
+    "phase": "launch",
+    "title": "수익모델·가격·결제·구독",
+    "sub": "무료 사용자가 유료 고객이 되는 구조를 만들고 한 건의 거래를 안전하게 처리한다.",
+    "result": "가격표 + 테스트 결제 흐름",
+    "checkCount": 4
+  },
+  {
+    "id": "10",
+    "week": 5,
+    "phase": "launch",
+    "title": "SEO 기술 실습 — 검색에 발견되기",
+    "sub": "검색엔진이 읽고 이해할 수 있는 페이지를 만든다.",
+    "result": "SEO 점검표 + 검색 콘솔",
+    "checkCount": 4
+  },
+  {
+    "id": "11",
+    "week": 6,
+    "phase": "launch",
+    "title": "AI 검색·GEO와 근거 중심 콘텐츠",
+    "sub": "Google AI 검색과 다른 AI 검색의 접근 조건을 구분하고 검증 가능한 공개 설명 페이지를 만든다.",
+    "result": "질문형 지식 페이지 3개",
+    "checkCount": 4
+  },
+  {
+    "id": "12",
+    "week": 6,
+    "phase": "launch",
+    "title": "국내외 검색 포털 실제 등록",
+    "sub": "Google, 네이버, Daum과 매장형 서비스의 카카오 등록을 구분해 완료한다.",
+    "result": "검색엔진별 등록·검증 기록",
+    "checkCount": 4
+  },
+  {
+    "id": "13",
+    "week": 7,
+    "phase": "grow",
+    "title": "Google Ads·네이버 광고 실습",
+    "sub": "적은 예산으로 첫 유료 고객을 찾되 반드시 전환을 측정한다.",
+    "result": "캠페인 기획안 + 측정 가능한 광고",
+    "checkCount": 4
+  },
+  {
+    "id": "14",
+    "week": 7,
+    "phase": "grow",
+    "title": "AdSense·콘텐츠·무료 유입",
+    "sub": "광고비를 쓰는 방법과 광고수익을 받는 방법을 확실히 분리한다.",
+    "result": "유입 채널별 콘텐츠 달력",
+    "checkCount": 4
+  },
+  {
+    "id": "15",
+    "week": 8,
+    "phase": "grow",
+    "title": "GA4 주요 이벤트·퍼널·개선 실험",
+    "sub": "주요 이벤트와 광고 전환을 구분하고 중복·개인정보를 점검한 데이터로 개선한다.",
+    "result": "실사용 퍼널 대시보드",
+    "checkCount": 4
+  },
+  {
+    "id": "16",
+    "week": 8,
+    "phase": "business",
+    "title": "사업자등록·통신판매업·행정 실무",
+    "sub": "한국에서 서비스를 실제 판매하는 주체로서 기본 신고와 준비를 이해한다.",
+    "result": "내 사업 행정 절차표",
+    "checkCount": 4
+  },
+  {
+    "id": "17",
+    "week": 9,
+    "phase": "business",
+    "title": "개인정보·약관·환불·세무 체크",
+    "sub": "고객의 돈과 데이터를 다루는 사업자가 지켜야 할 기본 원칙을 점검한다.",
+    "result": "법무·정산 준비 체크 패키지",
+    "checkCount": 4
+  },
+  {
+    "id": "18",
+    "week": 9,
+    "phase": "business",
+    "title": "운영·고객지원·최종 공개 런칭",
+    "sub": "첫 30일을 운영하고 다음 개선을 결정하는 창업자 루틴을 만든다.",
+    "result": "실서비스 + 30일 운영 계획",
+    "checkCount": 4
+  }
 ];
 
 const $=(sel,root=document)=>root.querySelector(sel);
@@ -116,7 +426,7 @@ function chapterCard(c){
   return `<a class="chapter-card ${locked?'is-locked':''}" href="#/chapter/${c.id}"><div class="card-top"><span class="chapter-badge">LESSON ${c.id} <span>· ${p.name}</span></span><span class="card-week">${c.week}주차 ${chDone(c)&&state.session.authenticated?'· 완료':''}</span></div><h3>${c.title}</h3><p>${c.sub}</p><div class="card-bottom"><span class="card-result">실습 결과물 · ${c.result}</span><span class="card-go">${label}</span></div></a>`;
 }
 function renderOverview(){
-  $('#breadcrumb').innerHTML='커리큘럼 <span>/</span> 전체 보기';document.title='전체 커리큘럼 | 런치랩';
+  $('#breadcrumb').innerHTML='커리큘럼 <span>/</span> 전체 보기';document.title='전체 커리큘럼 | 가온누리';
   const displayed=state.filter==='all'?chapters:chapters.filter(c=>c.phase===state.filter);
   $('#page').innerHTML=`
   <section class="hero"><div><div class="eyebrow">실제로 만드는 사람들을 위한 실전 클래스</div><h1>아이디어를<br>실제 서비스로.<br><em>9주, 끝까지.</em></h1><p class="intro">AI를 처음 접해도 괜찮습니다. 기획에서 개발, 배포, 검색 노출, 고객 확보와 운영까지. <strong>하나의 서비스를 완성하는 과정</strong>을 차근차근 함께 진행합니다.</p><div class="btn-row"><a class="btn" href="#/chapter/01">첫 강의 살펴보기</a><a class="btn secondary" href="#roadmap">9주 커리큘럼</a></div></div><div class="hero-art"><div class="art-head"><span>THE LAUNCH PROCESS</span><span class="art-spark">✳</span></div><div class="art-stages"><div class="art-stage"><span class="art-num">01</span><div><strong>Discover</strong><small>시작할 문제를 찾고 검증합니다</small></div></div><div class="art-stage"><span class="art-num">02</span><div><strong>Build</strong><small>AI를 활용해 제품을 만듭니다</small></div></div><div class="art-stage"><span class="art-num">03</span><div><strong>Launch</strong><small>도메인과 결제를 연결합니다</small></div></div><div class="art-stage"><span class="art-num">04</span><div><strong>Grow</strong><small>고객을 만나고 서비스를 운영합니다</small></div></div></div><div class="art-foot"><div class="art-bar"></div><small>ONE SERVICE. REAL LAUNCH.</small></div></div></section>
@@ -136,16 +446,16 @@ function renderOverview(){
   <div class="week-row"><div>05</div><div>개발자에서 사업 운영자로</div><div>사업자·환불·개인정보·세무·고객지원·손익을 직접 챙긴다.</div></div>
   </div></section>
   <section class="closing-panel"><div><div class="eyebrow">최종 수료 기준</div><h2>수료는 ‘강의 시청’이 아니라 ‘실서비스 출시’</h2><p>운영 URL, 핵심 기능 시연, 도메인·검색 등록, 전환 측정, 정책·사업 준비표, 30일 운영 계획을 6분 발표로 확인합니다. 결제·신고·광고 집행은 개인 상황에 맞춰 실제 집행 또는 안전한 모의 실습으로 선택합니다.</p></div><a class="btn" href="#/chapter/18">최종 과제 보기</a></section>
-  <p class="footnote">2026년 11월 기준 실습형 강의계획서입니다. 법령·결제·검색·광고 서비스는 정책이 바뀔 수 있으므로 실습 당일 공식 문서를 다시 확인합니다.</p>`;
+  <p class="footnote">2026년 11월 20일 공식 기술 문서 검토를 반영했습니다. AI API·인증·배포·검색·분석을 실제 오류와 운영 상황까지 실습합니다. 법령·결제·검색·광고 서비스는 정책이 바뀔 수 있으므로 실습 당일 공식 문서를 다시 확인합니다.</p>`;
   $$('.chip').forEach(btn=>btn.addEventListener('click',()=>{state.filter=btn.dataset.filter;$$('.chip').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));$('#cards').innerHTML=(state.filter==='all'?chapters:chapters.filter(c=>c.phase===state.filter)).map(chapterCard).join('');}));
 }
 function renderChapterFull(c){
   const idx=chapters.findIndex(item=>item.id===c.id),p=phaseById(c.phase),prev=chapters[idx-1],next=chapters[idx+1];
-  $('#breadcrumb').innerHTML=`커리큘럼 <span>/</span> ${c.id}강`;document.title=`${c.title} | 런치랩`;
+  $('#breadcrumb').innerHTML=`커리큘럼 <span>/</span> ${c.id}강`;document.title=`${c.title} | 가온누리`;
   const count=c.checks.filter((_,i)=>state.completed.has(`${c.id}-${i}`)).length;
   const taskChecklist=c.checks.map((label,i)=>`<label class="check-item"><input type="checkbox" data-check="${c.id}-${i}" ${state.completed.has(`${c.id}-${i}`)?'checked':''}><span>${label}</span></label>`).join('');
   $('#page').innerHTML=`
-  <section class="detail-hero"><div class="detail-kicker">${p.name}<span>·</span> ${c.id}강 <span>·</span> ${c.week}주차</div><h1>${c.title}</h1><p class="detail-sub">${c.sub}</p><div class="detail-meta"><span class="mini-tag">3시간 실습</span><span class="mini-tag">결과물: ${c.result}</span><span class="mini-tag">입문자 과정</span></div></section>
+  <section class="detail-hero"><div class="detail-kicker">${p.name}<span>·</span> ${c.id}강 <span>·</span> ${c.week}주차</div><h1>${c.title}</h1><p class="detail-sub">${c.sub}</p><div class="detail-meta"><span class="mini-tag">3시간 실습</span><span class="mini-tag">공식 문서 검토: ${c.reviewedAt}</span><span class="mini-tag">결과물: ${c.result}</span><span class="mini-tag">입문자 과정</span></div></section>
   <div class="learning-goal"><div class="goal-black"><div class="mini-label">이번 수업의 목표</div><h2>오늘은 이것까지<br>직접 해봅니다</h2><p>강사가 실제 작업 과정을 시연하고, 각자의 서비스에 똑같이 적용해 봅니다.</p></div><div class="goal-white"><div class="icon-tile">✓</div><div><small>완료 결과물</small><strong>${c.result}</strong><p>끝날 때 실제 작동 화면 또는 문서로 확인합니다. 서비스 형태에 따라 모의 실습으로 대체할 수 있습니다.</p></div></div></div>
   <div class="detail-cols"><div class="detail-main">
   <section class="detail-section"><h2><span class="counter">01</span> 꼭 알아야 할 개념 <small style="font-size:12px;color:#8996a9;font-weight:500">· 약 25분</small></h2><div class="theory-box"><ul>${c.theory.map(x=>`<li>${x}</li>`).join('')}</ul></div></section>
@@ -180,7 +490,7 @@ function renderChapterTeaser(c){
   const member=state.session.authenticated;
   const previous=String(Math.max(1,state.session.unlocked||1)).padStart(2,'0');
   $('#breadcrumb').innerHTML=`커리큘럼 <span>/</span> ${c.id}강 미리보기`;
-  document.title=c.title+' | 런치랩 미리보기';
+  document.title=c.title+' | 가온누리 미리보기';
   $('#page').innerHTML=`
     <section class="detail-hero"><div class="detail-kicker">LESSON ${c.id} <span>·</span> ${p.name} <span>·</span> ${c.week}주차</div>
       <h1>${c.title}</h1><p class="detail-sub">${c.sub}</p>
@@ -257,7 +567,7 @@ function showAuth(mode='signup'){
   authRoot.innerHTML=`<div class="auth-modal"><div class="auth-backdrop" data-auth-close></div>
     <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-heading">
     <button class="auth-close" type="button" data-auth-close aria-label="닫기">×</button>
-    <span class="auth-logo">L.</span>
+    <span class="auth-logo">G.</span>
     <h2 id="auth-heading">${signup?'배움을 시작해 볼까요?':'다시 만나 반갑습니다.'}</h2>
     <p class="auth-intro">${signup?'무료 회원가입 후 1강부터 시작하고, 수업을 완료할 때마다 다음 강의를 열어보세요.':'가입한 이메일과 비밀번호로 로그인하면 내 학습 진도를 이어갈 수 있습니다.'}</p>
     <div class="auth-tabs"><button type="button" class="${signup?'active':''}" data-auth-mode="signup">회원가입</button><button type="button" class="${!signup?'active':''}" data-auth-mode="login">로그인</button></div>
@@ -314,7 +624,7 @@ function showAccount(){
   authRoot.innerHTML=`<div class="auth-modal"><div class="auth-backdrop" data-auth-close></div>
   <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="account-title">
   <button class="auth-close" type="button" data-auth-close aria-label="닫기">×</button>
-  <span class="auth-logo">L.</span><h2 id="account-title">내 계정 관리</h2>
+  <span class="auth-logo">G.</span><h2 id="account-title">내 계정 관리</h2>
   <p class="auth-intro">현재 계정: ${safeText(state.session.email)}</p>
   <form id="delete-form" class="auth-form">
     ${state.session.authMethod==='google'?'<p class="auth-note">가입한 Google 계정을 다시 인증한 뒤 탈퇴할 수 있습니다.</p><div id="google-delete-button"></div>':'<div class="auth-field"><label for="delete-password">회원 탈퇴를 위한 비밀번호 확인</label><input id="delete-password" type="password" name="password" autocomplete="current-password" required></div>'}
