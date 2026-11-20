@@ -371,3 +371,54 @@ button,input,select,textarea {font-family:var(--font-korean);}
 .chapter-card h3,.phase-tile h3,.detail-section h2,.step h3,.side-card h3,.auth-dialog h2 {font-weight:600;letter-spacing:-.01em;}
 .nav-link {font-size:14px;line-height:1.65;letter-spacing:0;}
 .auth-field input {font-size:16px;}
+
+/* Mobile layout: keep account actions inside the header and preserve readable lines. */
+.crumb,.top-right,.auth-status {min-width:0;}
+.logout-btn,.auth-trigger {white-space:nowrap;}
+.step>div:last-child,.week-row>div,.card-result {min-width:0;overflow-wrap:anywhere;}
+@media(max-width:860px) {
+  .sidebar {height:100dvh;}
+}
+@media(max-width:590px) {
+  .topbar {display:grid;grid-template-columns:40px minmax(0,1fr);grid-template-rows:auto auto;height:auto;min-height:80px;gap:6px 10px;padding:10px 16px;}
+  .menu-btn {grid-column:1;grid-row:1 / 3;width:40px;height:40px;}
+  .crumb {grid-column:2;grid-row:1;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;line-height:1.5;}
+  .crumb span {padding:0 6px;}
+  .top-right {grid-column:2;grid-row:2;justify-self:stretch;gap:0;}
+  .auth-status {width:100%;gap:8px;}
+  .member-label {flex:1;min-width:0;max-width:none;font-size:11px;}
+  .logout-btn {flex:none;min-height:36px;padding:6px 4px;font-size:12px;}
+  .auth-trigger {min-height:36px;padding:8px 12px;}
+  main {padding-right:16px;padding-left:16px;}
+  .footer {margin-right:16px;margin-left:16px;}
+  .hero>div:first-child {padding:32px 20px 26px;min-width:0;}
+  .hero h1 {font-size:clamp(32px,8.8vw,46px);line-height:1.4;letter-spacing:-.025em;word-break:keep-all;overflow-wrap:anywhere;}
+  .hero .intro {line-height:1.85;}
+  .hero .btn-row {display:flex;flex-wrap:wrap;}
+  .hero-art {padding:20px;}
+  .art-stages {grid-template-columns:1fr;}
+  .art-stage {grid-template-columns:36px minmax(0,1fr);gap:12px;}
+  .art-stage small {font-size:12px;}
+  .section-head h2 {font-size:clamp(24px,6.5vw,29px);word-break:keep-all;overflow-wrap:anywhere;}
+  .chapter-card h3 {word-break:keep-all;overflow-wrap:anywhere;}
+  .card-bottom {align-items:flex-start;flex-wrap:wrap;gap:8px;}
+  .card-result {flex:1 1 150px;}
+  .card-go {margin-left:auto;}
+  .week-row {grid-template-columns:48px minmax(0,1fr);gap:8px;padding:16px;}
+  .detail-hero {padding:32px 0 28px;}
+  .detail-hero h1 {font-size:clamp(28px,7.5vw,36px);line-height:1.45;word-break:keep-all;overflow-wrap:anywhere;}
+  .detail-section h2 {font-size:clamp(20px,5.3vw,23px);}
+  .detail-section h2 small {display:block;margin-top:5px;padding-left:30px;white-space:nowrap;}
+  .theory-box {padding:18px;}
+  .theory-box ul {padding-left:18px;}
+  .step {padding:18px 16px;gap:10px;}
+  .step-number {min-width:22px;}
+  .step h3 {font-size:18px;word-break:keep-all;overflow-wrap:anywhere;}
+  .goal-black,.goal-white,.side-card,.notice-card,.exercise {padding:22px;}
+  .detail-bottom-nav {flex-wrap:wrap;}
+  .detail-bottom-nav a {min-height:44px;}
+  .auth-modal {padding:12px;}
+  .auth-dialog {min-width:0;max-height:min(90vh,780px);max-height:min(90dvh,780px);padding:28px 20px;overscroll-behavior:contain;}
+  .auth-dialog h2 {padding-right:28px;font-size:26px;word-break:keep-all;}
+  .consent-row span,.policy-container p {overflow-wrap:anywhere;}
+}
